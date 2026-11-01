@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sky Gallery — ภาพถ่ายท้องฟ้าทั้งหมดใน LOOK UP.">
+  <title>Gallery | LOOK UP.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Mali:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Noto+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body id="top">
+  <input type="checkbox" id="nav-toggle" class="state nav-check" aria-label="เปิด/ปิดเมนู">
+  <header class="navbar solid">
+    <a class="logo" href="index.html">LOOK UP<span>.</span></a>
+
+    <nav class="nav-links" aria-label="เมนูหลัก">
+      <a href="index.html">HOME</a>
+      <a href="gallery.html" class="active">GALLERY</a>
+      <a href="journal.html">JOURNAL</a>
+      <a href="calendar.html">CALENDAR</a>
+      <a class="mobile-only" href="about.html">ABOUT</a>
+    </nav>
+
+    <a href="about.html" class="nav-about">ABOUT ↗</a>
+    <label class="menu-toggle" for="nav-toggle" aria-label="เมนู"></label>
+  </header>
+
+  <main>
+    <section class="page-hero section-wrap">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">02 / The collection</div>
+          <h1>Sky <em>Gallery</em></h1>
+        </div>
+        <p class="section-note">A collection of little moments above us.</p>
+      </div>
+    </section>
+
+    <section class="gallery-section section-wrap" id="gallery">
+      <input class="state filter-radio" type="radio" name="filter" id="f-all" checked aria-label="ALL">
+      <input class="state filter-radio" type="radio" name="filter" id="f-sunrise" aria-label="SUNRISE">
+      <input class="state filter-radio" type="radio" name="filter" id="f-sunset" aria-label="SUNSET">
+      <input class="state filter-radio" type="radio" name="filter" id="f-cloudy" aria-label="CLOUDY">
+      <input class="state filter-radio" type="radio" name="filter" id="f-blue" aria-label="BLUE SKY">
+
+      <div class="filter-bar">
+        <label for="f-all">ALL</label>
+        <label for="f-sunrise">SUNRISE</label>
+        <label for="f-sunset">SUNSET</label>
+        <label for="f-cloudy">CLOUDY</label>
+        <label for="f-blue">BLUE SKY</label>
+      </div>
+
+      <div class="gallery-grid">
+        <a class="photo-card polaroid" href="#photo-1" id="c-1" data-cat="sunrise">
+          <span class="polaroid-photo"><img src="images/sky-01.jpg" alt="A Quiet Morning" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>A Quiet Morning</strong><small>12 JAN 2026 · SUNRISE</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-2" id="c-2" data-cat="sunset">
+          <span class="polaroid-photo"><img src="images/sky-02.jpg" alt="Golden Hour" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Golden Hour</strong><small>08 FEB 2026 · SUNSET</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-3" id="c-3" data-cat="cloudy">
+          <span class="polaroid-photo"><img src="images/sky-03.jpg" alt="Cloud Stories" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Cloud Stories</strong><small>15 MAR 2026 · CLOUDY</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-4" id="c-4" data-cat="blue">
+          <span class="polaroid-photo"><img src="images/sky-09.jpg" alt="Blue Afternoon" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Blue Afternoon</strong><small>20 APR 2026 · BLUE</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-5" id="c-5" data-cat="cloudy">
+          <span class="polaroid-photo"><img src="images/sky-24.jpg" alt="Before the Rain" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Before the Rain</strong><small>06 MAY 2026 · CLOUDY</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-6" id="c-6" data-cat="sunset">
+          <span class="polaroid-photo"><img src="images/sky-10.jpg" alt="Last Light" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Last Light</strong><small>18 JUN 2026 · SUNSET</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-7" id="c-7" data-cat="sunrise">
+          <span class="polaroid-photo"><img src="images/sky-11.jpg" alt="Morning Glow" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Morning Glow</strong><small>02 JUL 2026 · SUNRISE</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-8" id="c-8" data-cat="cloudy">
+          <span class="polaroid-photo"><img src="images/sky-12.jpg" alt="Cotton Clouds" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Cotton Clouds</strong><small>14 JUL 2026 · CLOUDY</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-9" id="c-9" data-cat="sunset">
+          <span class="polaroid-photo"><img src="images/sky-13.jpg" alt="Pastel Evening" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Pastel Evening</strong><small>26 JUL 2026 · SUNSET</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-10" id="c-10" data-cat="blue">
+          <span class="polaroid-photo"><img src="images/sky-14.jpg" alt="Open Blue" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Open Blue</strong><small>05 AUG 2026 · BLUE</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-11" id="c-11" data-cat="sunrise">
+          <span class="polaroid-photo"><img src="images/hero-sky.jpg" alt="A New Beginning" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>A New Beginning</strong><small>17 AUG 2026 · SUNRISE</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-12" id="c-12" data-cat="cloudy">
+          <span class="polaroid-photo"><img src="images/sky-26.jpg" alt="Cloudy Mood" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Cloudy Mood</strong><small>29 AUG 2026 · CLOUDY</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-13" id="c-13" data-cat="sunset">
+          <span class="polaroid-photo"><img src="images/sky-17.jpg" alt="Orange Horizon" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Orange Horizon</strong><small>04 SEP 2026 · SUNSET</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-14" id="c-14" data-cat="blue">
+          <span class="polaroid-photo"><img src="images/sky-18.jpg" alt="Simply Blue" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Simply Blue</strong><small>12 SEP 2026 · BLUE</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-15" id="c-15" data-cat="sunrise">
+          <span class="polaroid-photo"><img src="images/sky-19.jpg" alt="Soft Sunrise" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Soft Sunrise</strong><small>21 SEP 2026 · SUNRISE</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-16" id="c-16" data-cat="cloudy">
+          <span class="polaroid-photo"><img src="images/sky-20.jpg" alt="Passing Clouds" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Passing Clouds</strong><small>02 OCT 2026 · CLOUDY</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-17" id="c-17" data-cat="sunset">
+          <span class="polaroid-photo"><img src="images/sky-21.jpg" alt="Golden Goodbye" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Golden Goodbye</strong><small>09 OCT 2026 · SUNSET</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-18" id="c-18" data-cat="blue">
+          <span class="polaroid-photo"><img src="images/sky-22.jpg" alt="Blue Escape" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Blue Escape</strong><small>16 OCT 2026 · BLUE</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-19" id="c-19" data-cat="cloudy">
+          <span class="polaroid-photo"><img src="images/sky-23.jpg" alt="Dreamy Clouds" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Dreamy Clouds</strong><small>22 OCT 2026 · CLOUDY</small></span>
+        </a>
+        <a class="photo-card polaroid" href="#photo-20" id="c-20" data-cat="sunset">
+          <span class="polaroid-photo"><img src="images/sky-25.jpg" alt="Until Tomorrow" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Until Tomorrow</strong><small>27 OCT 2026 · SUNSET</small></span>
+        </a>
+      </div>
+
+      <p class="gallery-count"><span class="c-all">SHOWING 20 / 20 PHOTOS</span><span class="c-sunrise">SHOWING 4 / 20 PHOTOS</span><span class="c-sunset">SHOWING 6 / 20 PHOTOS</span><span class="c-cloudy">SHOWING 6 / 20 PHOTOS</span><span class="c-blue">SHOWING 4 / 20 PHOTOS</span></p>
+    </section>
+
+    <div class="lightbox" id="photo-1" data-cat="sunrise" role="dialog" aria-label="A Quiet Morning">
+      <a class="lightbox-backdrop" href="#c-1" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-1" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-01.jpg" alt="A Quiet Morning" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>A Quiet Morning</strong><small>12 JAN 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">SUNRISE — 01 / 20</span>
+          <h3>A Quiet Morning</h3>
+          <p class="object-story">เช้าวันหนึ่งที่ท้องฟ้าเริ่มเปลี่ยนสี แสงแดดอ่อน ๆ ทำให้บรรยากาศดูสงบ</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>12 JAN 2026</dd></div>
+            <div><dt>SKY</dt><dd>Sunrise</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>01 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-20" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-2" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-2" data-cat="sunset" role="dialog" aria-label="Golden Hour">
+      <a class="lightbox-backdrop" href="#c-2" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-2" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-02.jpg" alt="Golden Hour" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Golden Hour</strong><small>08 FEB 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">SUNSET — 02 / 20</span>
+          <h3>Golden Hour</h3>
+          <p class="object-story">ช่วงเวลาที่ท้องฟ้าเปลี่ยนเป็นสีส้มทอง ก่อนที่พระอาทิตย์จะลับขอบฟ้า</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>08 FEB 2026</dd></div>
+            <div><dt>SKY</dt><dd>Sunset</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>02 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-1" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-3" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-3" data-cat="cloudy" role="dialog" aria-label="Cloud Stories">
+      <a class="lightbox-backdrop" href="#c-3" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-3" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-03.jpg" alt="Cloud Stories" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Cloud Stories</strong><small>15 MAR 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">CLOUDY — 03 / 20</span>
+          <h3>Cloud Stories</h3>
+          <p class="object-story">กลุ่มเมฆที่ลอยผ่านท้องฟ้า แต่ละก้อนมีรูปร่างและความสวยงามต่างกัน</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>15 MAR 2026</dd></div>
+            <div><dt>SKY</dt><dd>Cloudy</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>03 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-2" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-4" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-4" data-cat="blue" role="dialog" aria-label="Blue Afternoon">
+      <a class="lightbox-backdrop" href="#c-4" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-4" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-09.jpg" alt="Blue Afternoon" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Blue Afternoon</strong><small>20 APR 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">BLUE — 04 / 20</span>
+          <h3>Blue Afternoon</h3>
+          <p class="object-story">ท้องฟ้าสีฟ้าในช่วงบ่าย เป็นวันที่อากาศสดใสและเหมาะกับการออกไปถ่ายรูป</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>20 APR 2026</dd></div>
+            <div><dt>SKY</dt><dd>Blue Sky</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>04 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-3" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-5" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-5" data-cat="cloudy" role="dialog" aria-label="Before the Rain">
+      <a class="lightbox-backdrop" href="#c-5" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-5" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-24.jpg" alt="Before the Rain" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Before the Rain</strong><small>06 MAY 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">CLOUDY — 05 / 20</span>
+          <h3>Before the Rain</h3>
+          <p class="object-story">ก่อนที่ฝนจะตก ท้องฟ้าถูกปกคลุมด้วยเมฆสีเข้มและให้บรรยากาศที่แตกต่าง</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>06 MAY 2026</dd></div>
+            <div><dt>SKY</dt><dd>Cloudy</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>05 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-4" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-6" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-6" data-cat="sunset" role="dialog" aria-label="Last Light">
+      <a class="lightbox-backdrop" href="#c-6" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-6" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-10.jpg" alt="Last Light" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Last Light</strong><small>18 JUN 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">SUNSET — 06 / 20</span>
+          <h3>Last Light</h3>
+          <p class="object-story">แสงสุดท้ายของวัน เป็นช่วงเวลาสั้น ๆ ที่อยากเก็บไว้ในความทรงจำ</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>18 JUN 2026</dd></div>
+            <div><dt>SKY</dt><dd>Sunset</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>06 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-5" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-7" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-7" data-cat="sunrise" role="dialog" aria-label="Morning Glow">
+      <a class="lightbox-backdrop" href="#c-7" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-7" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-11.jpg" alt="Morning Glow" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Morning Glow</strong><small>02 JUL 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">SUNRISE — 07 / 20</span>
+          <h3>Morning Glow</h3>
+          <p class="object-story">แสงสีทองยามเช้าที่ค่อย ๆ ส่องผ่านขอบฟ้า เริ่มต้นวันใหม่อย่างสดใส</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>02 JUL 2026</dd></div>
+            <div><dt>SKY</dt><dd>Sunrise</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>07 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-6" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-8" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-8" data-cat="cloudy" role="dialog" aria-label="Cotton Clouds">
+      <a class="lightbox-backdrop" href="#c-8" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-8" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-12.jpg" alt="Cotton Clouds" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Cotton Clouds</strong><small>14 JUL 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">CLOUDY — 08 / 20</span>
+          <h3>Cotton Clouds</h3>
+          <p class="object-story">ก้อนเมฆสีขาวนุ่มคล้ายปุยฝ้าย ลอยอยู่บนท้องฟ้าสีฟ้าอ่อน</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>14 JUL 2026</dd></div>
+            <div><dt>SKY</dt><dd>Cloudy</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>08 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-7" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-9" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-9" data-cat="sunset" role="dialog" aria-label="Pastel Evening">
+      <a class="lightbox-backdrop" href="#c-9" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-9" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-13.jpg" alt="Pastel Evening" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Pastel Evening</strong><small>26 JUL 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">SUNSET — 09 / 20</span>
+          <h3>Pastel Evening</h3>
+          <p class="object-story">ท้องฟ้ายามเย็นที่แต่งแต้มด้วยสีชมพูและม่วง เป็นช่วงเวลาที่ดูอบอุ่น</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>26 JUL 2026</dd></div>
+            <div><dt>SKY</dt><dd>Sunset</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>09 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-8" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-10" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-10" data-cat="blue" role="dialog" aria-label="Open Blue">
+      <a class="lightbox-backdrop" href="#c-10" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-10" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-14.jpg" alt="Open Blue" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Open Blue</strong><small>05 AUG 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">BLUE — 10 / 20</span>
+          <h3>Open Blue</h3>
+          <p class="object-story">ท้องฟ้าสีฟ้ากว้างสุดสายตา พร้อมแสงแดดที่ทำให้ทุกอย่างดูสดใส</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>05 AUG 2026</dd></div>
+            <div><dt>SKY</dt><dd>Blue Sky</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>10 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-9" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-11" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-11" data-cat="sunrise" role="dialog" aria-label="A New Beginning">
+      <a class="lightbox-backdrop" href="#c-11" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-11" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/hero-sky.jpg" alt="A New Beginning" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>A New Beginning</strong><small>17 AUG 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">SUNRISE — 11 / 20</span>
+          <h3>A New Beginning</h3>
+          <p class="object-story">พระอาทิตย์เริ่มขึ้นเหนือขอบฟ้า พร้อมแสงแรกที่ทำให้เช้าวันนั้นพิเศษ</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>17 AUG 2026</dd></div>
+            <div><dt>SKY</dt><dd>Sunrise</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>11 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-10" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-12" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-12" data-cat="cloudy" role="dialog" aria-label="Cloudy Mood">
+      <a class="lightbox-backdrop" href="#c-12" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-12" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-26.jpg" alt="Cloudy Mood" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Cloudy Mood</strong><small>29 AUG 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">CLOUDY — 12 / 20</span>
+          <h3>Cloudy Mood</h3>
+          <p class="object-story">วันที่ท้องฟ้าเต็มไปด้วยเมฆ ให้ความรู้สึกสงบและแตกต่างจากวันอื่น</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>29 AUG 2026</dd></div>
+            <div><dt>SKY</dt><dd>Cloudy</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>12 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-11" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-13" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-13" data-cat="sunset" role="dialog" aria-label="Orange Horizon">
+      <a class="lightbox-backdrop" href="#c-13" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-13" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-17.jpg" alt="Orange Horizon" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Orange Horizon</strong><small>04 SEP 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">SUNSET — 13 / 20</span>
+          <h3>Orange Horizon</h3>
+          <p class="object-story">เส้นขอบฟ้าสีส้มในช่วงเย็น แสงอาทิตย์ค่อย ๆ จางหายไปอย่างช้า ๆ</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>04 SEP 2026</dd></div>
+            <div><dt>SKY</dt><dd>Sunset</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>13 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-12" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-14" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-14" data-cat="blue" role="dialog" aria-label="Simply Blue">
+      <a class="lightbox-backdrop" href="#c-14" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-14" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-18.jpg" alt="Simply Blue" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Simply Blue</strong><small>12 SEP 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">BLUE — 14 / 20</span>
+          <h3>Simply Blue</h3>
+          <p class="object-story">ท้องฟ้าสีฟ้าเรียบง่ายที่ทำให้รู้สึกสบายตา เป็นภาพธรรมดาที่น่าจดจำ</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>12 SEP 2026</dd></div>
+            <div><dt>SKY</dt><dd>Blue Sky</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>14 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-13" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-15" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-15" data-cat="sunrise" role="dialog" aria-label="Soft Sunrise">
+      <a class="lightbox-backdrop" href="#c-15" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-15" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-19.jpg" alt="Soft Sunrise" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Soft Sunrise</strong><small>21 SEP 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">SUNRISE — 15 / 20</span>
+          <h3>Soft Sunrise</h3>
+          <p class="object-story">แสงแดดยามเช้าที่นุ่มนวล ค่อย ๆ เปลี่ยนสีของท้องฟ้าให้สว่างขึ้น</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>21 SEP 2026</dd></div>
+            <div><dt>SKY</dt><dd>Sunrise</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>15 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-14" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-16" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-16" data-cat="cloudy" role="dialog" aria-label="Passing Clouds">
+      <a class="lightbox-backdrop" href="#c-16" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-16" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-20.jpg" alt="Passing Clouds" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Passing Clouds</strong><small>02 OCT 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">CLOUDY — 16 / 20</span>
+          <h3>Passing Clouds</h3>
+          <p class="object-story">เมฆที่กำลังเคลื่อนตัวผ่านท้องฟ้า เปลี่ยนรูปร่างไปตามสายลม</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>02 OCT 2026</dd></div>
+            <div><dt>SKY</dt><dd>Cloudy</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>16 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-15" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-17" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-17" data-cat="sunset" role="dialog" aria-label="Golden Goodbye">
+      <a class="lightbox-backdrop" href="#c-17" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-17" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-21.jpg" alt="Golden Goodbye" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Golden Goodbye</strong><small>09 OCT 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">SUNSET — 17 / 20</span>
+          <h3>Golden Goodbye</h3>
+          <p class="object-story">แสงสีทองในช่วงท้ายของวัน เป็นอีกหนึ่งช่วงเวลาที่อยากหยุดเก็บไว้</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>09 OCT 2026</dd></div>
+            <div><dt>SKY</dt><dd>Sunset</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>17 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-16" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-18" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-18" data-cat="blue" role="dialog" aria-label="Blue Escape">
+      <a class="lightbox-backdrop" href="#c-18" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-18" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-22.jpg" alt="Blue Escape" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Blue Escape</strong><small>16 OCT 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">BLUE — 18 / 20</span>
+          <h3>Blue Escape</h3>
+          <p class="object-story">มองขึ้นไปเห็นท้องฟ้าสีฟ้าสดใส ช่วยเติมความสดชื่นให้กับวันธรรมดา</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>16 OCT 2026</dd></div>
+            <div><dt>SKY</dt><dd>Blue Sky</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>18 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-17" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-19" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-19" data-cat="cloudy" role="dialog" aria-label="Dreamy Clouds">
+      <a class="lightbox-backdrop" href="#c-19" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-19" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-23.jpg" alt="Dreamy Clouds" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Dreamy Clouds</strong><small>22 OCT 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">CLOUDY — 19 / 20</span>
+          <h3>Dreamy Clouds</h3>
+          <p class="object-story">กลุ่มเมฆที่เรียงตัวอย่างสวยงามราวกับภาพวาดบนผืนฟ้า</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>22 OCT 2026</dd></div>
+            <div><dt>SKY</dt><dd>Cloudy</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>19 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-18" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-20" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="photo-20" data-cat="sunset" role="dialog" aria-label="Until Tomorrow">
+      <a class="lightbox-backdrop" href="#c-20" tabindex="-1" aria-hidden="true"></a>
+      <a class="lightbox-close" href="#c-20" aria-label="ปิด">CLOSE ×</a>
+
+      <div class="object-page">
+        <div class="object-stage">
+          <figure class="polaroid">
+            <span class="polaroid-photo"><img src="images/sky-25.jpg" alt="Until Tomorrow" loading="lazy"></span>
+            <figcaption class="polaroid-caption"><strong>Until Tomorrow</strong><small>27 OCT 2026</small></figcaption>
+          </figure>
+        </div>
+
+        <div class="object-info">
+          <span class="section-label">SUNSET — 20 / 20</span>
+          <h3>Until Tomorrow</h3>
+          <p class="object-story">พระอาทิตย์กำลังลับขอบฟ้า ปิดท้ายวันด้วยสีสันที่สวยงาม</p>
+
+          <dl class="object-details">
+            <div><dt>DATE</dt><dd>27 OCT 2026</dd></div>
+            <div><dt>SKY</dt><dd>Sunset</dd></div>
+            <div><dt>FORMAT</dt><dd>Instant print</dd></div>
+            <div><dt>NUMBER</dt><dd>20 of 20</dd></div>
+          </dl>
+
+          <div class="object-nav">
+            <a class="pill" href="#photo-19" aria-label="ภาพก่อนหน้า">← PREVIOUS</a>
+            <a class="pill" href="#photo-1" aria-label="ภาพถัดไป">NEXT →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <a class="logo" href="index.html">LOOK UP<span>.</span></a>
+    <p>MADE WITH MOMENTS &amp; MEMORIES.</p>
+    <a class="to-top" href="#top">© 2026 PERSONAL SKY ARCHIVE — BACK TO TOP ↑</a>
+  </footer>
+</body>
+</html>

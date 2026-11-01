@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LOOK UP. A personal archive of sky photography.">
+  <title>LOOK UP. — Sky Photo Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Mali:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Noto+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body id="top">
+  <input type="checkbox" id="nav-toggle" class="state nav-check" aria-label="เปิด/ปิดเมนู">
+  <header class="navbar solid">
+    <a class="logo" href="index.html">LOOK UP<span>.</span></a>
+
+    <nav class="nav-links" aria-label="เมนูหลัก">
+      <a href="index.html" class="active">HOME</a>
+      <a href="gallery.html">GALLERY</a>
+      <a href="journal.html">JOURNAL</a>
+      <a href="calendar.html">CALENDAR</a>
+      <a class="mobile-only" href="about.html">ABOUT</a>
+    </nav>
+
+    <a href="about.html" class="nav-about">ABOUT ↗</a>
+    <label class="menu-toggle" for="nav-toggle" aria-label="เมนู"></label>
+  </header>
+
+  <main>
+    <!-- HERO — CSS-only polaroid slideshow -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <p class="eyebrow">Personal sky photo archive — est. 2026</p>
+        <h1>Look at the sky.<br><em>Remember the moment.</em></h1>
+        <p class="hero-description">
+          A little collection of skies, colors and moments
+          captured through my camera.
+        </p>
+
+        <a href="gallery.html" class="primary-btn">EXPLORE COLLECTION ↗</a>
+      </div>
+
+      <div class="hero-stage" aria-label="สไลด์โชว์ภาพท้องฟ้า (วางเมาส์เพื่อหยุด)">
+        <div class="polaroid back" style="--x:-16%;--y:5%;--r:-10deg" aria-hidden="true">
+          <span class="polaroid-photo" style="background-image:url('images/sky-13.jpg')"></span>
+          <span class="polaroid-caption"></span>
+        </div>
+        <div class="polaroid back" style="--x:15%;--y:3%;--r:9deg" aria-hidden="true">
+          <span class="polaroid-photo" style="background-image:url('images/sky-22.jpg')"></span>
+          <span class="polaroid-caption"></span>
+        </div>
+
+        <div class="hero-float">
+          <div class="polaroid hero-main">
+            <span class="polaroid-photo">
+            <img class="hero-slide" src="images/hero-sky.jpg" alt="" style="--d:-1s">
+            <img class="hero-slide" src="images/sky-02.jpg" alt="" style="--d:4s">
+            <img class="hero-slide" src="images/sky-09.jpg" alt="" style="--d:9s">
+            <img class="hero-slide" src="images/sky-13.jpg" alt="" style="--d:14s">
+            <img class="hero-slide" src="images/sky-21.jpg" alt="" style="--d:19s">
+            <img class="hero-slide" src="images/sky-24.jpg" alt="" style="--d:24s">
+            </span>
+            <span class="polaroid-caption slide-captions">
+            <span style="--d:0s"><strong>A New Beginning</strong><small>01 / 06 · 17 AUG 2026</small></span>
+            <span style="--d:5s"><strong>Golden Hour</strong><small>02 / 06 · 08 FEB 2026</small></span>
+            <span style="--d:10s"><strong>Blue Afternoon</strong><small>03 / 06 · 20 APR 2026</small></span>
+            <span style="--d:15s"><strong>Pastel Evening</strong><small>04 / 06 · 26 JUL 2026</small></span>
+            <span style="--d:20s"><strong>Golden Goodbye</strong><small>05 / 06 · 09 OCT 2026</small></span>
+            <span style="--d:25s"><strong>Before the Rain</strong><small>06 / 06 · 06 MAY 2026</small></span>
+              <span class="slide-progress"><i></i></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="intro section-wrap reveal">
+      <div class="section-label">01 / The idea</div>
+      <div class="intro-content">
+        <h2>Every sky has<br>a <em>different story.</em></h2>
+        <p>
+          ท้องฟ้าในแต่ละวันไม่เคยเหมือนเดิม
+          บางวันสดใส บางวันเต็มไปด้วยเมฆ
+          และบางวันก็มีสีสันที่ทำให้เราอยากหยุดมอง
+          เว็บไซต์นี้จึงเป็นพื้นที่เล็ก ๆ สำหรับเก็บช่วงเวลาเหล่านั้นไว้
+        </p>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats section-wrap reveal">
+      <div class="stat"><strong>20</strong><span>PHOTOGRAPHS</span></div>
+      <div class="stat"><strong>04</strong><span>KINDS OF SKY</span></div>
+      <div class="stat"><strong>10</strong><span>MONTHS OF MEMORIES</span></div>
+    </section>
+
+    <!-- LATEST -->
+    <section class="latest-section section-wrap">
+      <div class="section-heading reveal">
+        <div>
+          <div class="section-label">Latest skies</div>
+          <h2>Fresh <em>moments</em></h2>
+        </div>
+        <a class="text-link" href="gallery.html">VIEW ALL 20 PHOTOS ↗</a>
+      </div>
+
+      <div class="gallery-grid">
+        <a class="photo-card polaroid" href="gallery.html#photo-20">
+          <span class="polaroid-photo"><img src="images/sky-25.jpg" alt="Until Tomorrow" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Until Tomorrow</strong><small>27 OCT 2026 · SUNSET</small></span>
+        </a>
+        <a class="photo-card polaroid" href="gallery.html#photo-19">
+          <span class="polaroid-photo"><img src="images/sky-23.jpg" alt="Dreamy Clouds" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Dreamy Clouds</strong><small>22 OCT 2026 · CLOUDY</small></span>
+        </a>
+        <a class="photo-card polaroid" href="gallery.html#photo-18">
+          <span class="polaroid-photo"><img src="images/sky-22.jpg" alt="Blue Escape" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Blue Escape</strong><small>16 OCT 2026 · BLUE</small></span>
+        </a>
+        <a class="photo-card polaroid" href="gallery.html#photo-17">
+          <span class="polaroid-photo"><img src="images/sky-21.jpg" alt="Golden Goodbye" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Golden Goodbye</strong><small>09 OCT 2026 · SUNSET</small></span>
+        </a>
+        <a class="photo-card polaroid" href="gallery.html#photo-16">
+          <span class="polaroid-photo"><img src="images/sky-20.jpg" alt="Passing Clouds" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Passing Clouds</strong><small>02 OCT 2026 · CLOUDY</small></span>
+        </a>
+        <a class="photo-card polaroid" href="gallery.html#photo-15">
+          <span class="polaroid-photo"><img src="images/sky-19.jpg" alt="Soft Sunrise" loading="lazy"></span>
+          <span class="polaroid-caption"><strong>Soft Sunrise</strong><small>21 SEP 2026 · SUNRISE</small></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- QUOTE -->
+    <section class="quote-section">
+      <div class="quote-bg"></div>
+      <div class="quote-content">
+        <span class="quote-mark">“</span>
+        <h2>The sky is a reminder<br>to <em>slow down.</em></h2>
+        <p>LOOK UP. — A PERSONAL SKY ARCHIVE</p>
+      </div>
+    </section>
+
+    <!-- EXPLORE -->
+    <section class="explore-section section-wrap" style="padding-top:120px">
+      <div class="section-heading reveal">
+        <div>
+          <div class="section-label">Keep exploring</div>
+          <h2>More from <em>the archive</em></h2>
+        </div>
+      </div>
+
+      <div class="explore-grid reveal">
+        <a class="explore-card" href="journal.html">
+          <span class="section-label">03 / Journal</span>
+          <h3>Sky Journal</h3>
+          <p>เรื่องราวและความทรงจำเบื้องหลังภาพถ่ายแต่ละภาพ</p>
+          <span class="arrow">READ NOTES ↗</span>
+        </a>
+        <a class="explore-card" href="calendar.html">
+          <span class="section-label">04 / Calendar</span>
+          <h3>Memory Calendar</h3>
+          <p>ค้นหาท้องฟ้าในแต่ละวัน ผ่านปฏิทินภาพถ่าย</p>
+          <span class="arrow">FIND A DATE ↗</span>
+        </a>
+        <a class="explore-card" href="about.html">
+          <span class="section-label">05 / About</span>
+          <h3>About</h3>
+          <p>ที่มาของโปรเจกต์ส่วนตัวนี้ และเหตุผลที่ผมเงยหน้ามองฟ้า</p>
+          <span class="arrow">READ MORE ↗</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="logo" href="index.html">LOOK UP<span>.</span></a>
+    <p>MADE WITH MOMENTS &amp; MEMORIES.</p>
+    <a class="to-top" href="#top">© 2026 PERSONAL SKY ARCHIVE — BACK TO TOP ↑</a>
+  </footer>
+</body>
+</html>

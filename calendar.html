@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Memory Calendar — ค้นหาภาพถ่ายท้องฟ้าตามวันที่">
+  <title>Calendar | LOOK UP.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Mali:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Noto+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+    <style>
+    #m-1:checked ~ .calendar-layout .month-1 { display: block; }
+    #m-1:checked ~ .calendar-layout .month-chips label[for="m-1"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    #m-1:focus-visible ~ .calendar-layout .month-chips label[for="m-1"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+    #m-2:checked ~ .calendar-layout .month-2 { display: block; }
+    #m-2:checked ~ .calendar-layout .month-chips label[for="m-2"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    #m-2:focus-visible ~ .calendar-layout .month-chips label[for="m-2"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+    #m-3:checked ~ .calendar-layout .month-3 { display: block; }
+    #m-3:checked ~ .calendar-layout .month-chips label[for="m-3"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    #m-3:focus-visible ~ .calendar-layout .month-chips label[for="m-3"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+    #m-4:checked ~ .calendar-layout .month-4 { display: block; }
+    #m-4:checked ~ .calendar-layout .month-chips label[for="m-4"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    #m-4:focus-visible ~ .calendar-layout .month-chips label[for="m-4"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+    #m-5:checked ~ .calendar-layout .month-5 { display: block; }
+    #m-5:checked ~ .calendar-layout .month-chips label[for="m-5"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    #m-5:focus-visible ~ .calendar-layout .month-chips label[for="m-5"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+    #m-6:checked ~ .calendar-layout .month-6 { display: block; }
+    #m-6:checked ~ .calendar-layout .month-chips label[for="m-6"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    #m-6:focus-visible ~ .calendar-layout .month-chips label[for="m-6"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+    #m-7:checked ~ .calendar-layout .month-7 { display: block; }
+    #m-7:checked ~ .calendar-layout .month-chips label[for="m-7"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    #m-7:focus-visible ~ .calendar-layout .month-chips label[for="m-7"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+    #m-8:checked ~ .calendar-layout .month-8 { display: block; }
+    #m-8:checked ~ .calendar-layout .month-chips label[for="m-8"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    #m-8:focus-visible ~ .calendar-layout .month-chips label[for="m-8"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+    #m-9:checked ~ .calendar-layout .month-9 { display: block; }
+    #m-9:checked ~ .calendar-layout .month-chips label[for="m-9"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    #m-9:focus-visible ~ .calendar-layout .month-chips label[for="m-9"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+    #m-10:checked ~ .calendar-layout .month-10 { display: block; }
+    #m-10:checked ~ .calendar-layout .month-chips label[for="m-10"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    #m-10:focus-visible ~ .calendar-layout .month-chips label[for="m-10"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+    #m-11:checked ~ .calendar-layout .month-11 { display: block; }
+    #m-11:checked ~ .calendar-layout .month-chips label[for="m-11"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    #m-11:focus-visible ~ .calendar-layout .month-chips label[for="m-11"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+    #m-12:checked ~ .calendar-layout .month-12 { display: block; }
+    #m-12:checked ~ .calendar-layout .month-chips label[for="m-12"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    #m-12:focus-visible ~ .calendar-layout .month-chips label[for="m-12"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+    #d-none:checked ~ .calendar-layout .panel-none { display: block; }
+    #d-1:checked ~ .calendar-layout .panel-1 { display: block; }
+    #d-1:checked ~ .calendar-layout label[for="d-1"] { background: var(--ink); color: var(--paper); }
+    #d-1:checked ~ .calendar-layout label[for="d-1"]::after { background: var(--lime); }
+    #d-2:checked ~ .calendar-layout .panel-2 { display: block; }
+    #d-2:checked ~ .calendar-layout label[for="d-2"] { background: var(--ink); color: var(--paper); }
+    #d-2:checked ~ .calendar-layout label[for="d-2"]::after { background: var(--lime); }
+    #d-3:checked ~ .calendar-layout .panel-3 { display: block; }
+    #d-3:checked ~ .calendar-layout label[for="d-3"] { background: var(--ink); color: var(--paper); }
+    #d-3:checked ~ .calendar-layout label[for="d-3"]::after { background: var(--lime); }
+    #d-4:checked ~ .calendar-layout .panel-4 { display: block; }
+    #d-4:checked ~ .calendar-layout label[for="d-4"] { background: var(--ink); color: var(--paper); }
+    #d-4:checked ~ .calendar-layout label[for="d-4"]::after { background: var(--lime); }
+    #d-5:checked ~ .calendar-layout .panel-5 { display: block; }
+    #d-5:checked ~ .calendar-layout label[for="d-5"] { background: var(--ink); color: var(--paper); }
+    #d-5:checked ~ .calendar-layout label[for="d-5"]::after { background: var(--lime); }
+    #d-6:checked ~ .calendar-layout .panel-6 { display: block; }
+    #d-6:checked ~ .calendar-layout label[for="d-6"] { background: var(--ink); color: var(--paper); }
+    #d-6:checked ~ .calendar-layout label[for="d-6"]::after { background: var(--lime); }
+    #d-7:checked ~ .calendar-layout .panel-7 { display: block; }
+    #d-7:checked ~ .calendar-layout label[for="d-7"] { background: var(--ink); color: var(--paper); }
+    #d-7:checked ~ .calendar-layout label[for="d-7"]::after { background: var(--lime); }
+    #d-8:checked ~ .calendar-layout .panel-8 { display: block; }
+    #d-8:checked ~ .calendar-layout label[for="d-8"] { background: var(--ink); color: var(--paper); }
+    #d-8:checked ~ .calendar-layout label[for="d-8"]::after { background: var(--lime); }
+    #d-9:checked ~ .calendar-layout .panel-9 { display: block; }
+    #d-9:checked ~ .calendar-layout label[for="d-9"] { background: var(--ink); color: var(--paper); }
+    #d-9:checked ~ .calendar-layout label[for="d-9"]::after { background: var(--lime); }
+    #d-10:checked ~ .calendar-layout .panel-10 { display: block; }
+    #d-10:checked ~ .calendar-layout label[for="d-10"] { background: var(--ink); color: var(--paper); }
+    #d-10:checked ~ .calendar-layout label[for="d-10"]::after { background: var(--lime); }
+    #d-11:checked ~ .calendar-layout .panel-11 { display: block; }
+    #d-11:checked ~ .calendar-layout label[for="d-11"] { background: var(--ink); color: var(--paper); }
+    #d-11:checked ~ .calendar-layout label[for="d-11"]::after { background: var(--lime); }
+    #d-12:checked ~ .calendar-layout .panel-12 { display: block; }
+    #d-12:checked ~ .calendar-layout label[for="d-12"] { background: var(--ink); color: var(--paper); }
+    #d-12:checked ~ .calendar-layout label[for="d-12"]::after { background: var(--lime); }
+    #d-13:checked ~ .calendar-layout .panel-13 { display: block; }
+    #d-13:checked ~ .calendar-layout label[for="d-13"] { background: var(--ink); color: var(--paper); }
+    #d-13:checked ~ .calendar-layout label[for="d-13"]::after { background: var(--lime); }
+    #d-14:checked ~ .calendar-layout .panel-14 { display: block; }
+    #d-14:checked ~ .calendar-layout label[for="d-14"] { background: var(--ink); color: var(--paper); }
+    #d-14:checked ~ .calendar-layout label[for="d-14"]::after { background: var(--lime); }
+    #d-15:checked ~ .calendar-layout .panel-15 { display: block; }
+    #d-15:checked ~ .calendar-layout label[for="d-15"] { background: var(--ink); color: var(--paper); }
+    #d-15:checked ~ .calendar-layout label[for="d-15"]::after { background: var(--lime); }
+    #d-16:checked ~ .calendar-layout .panel-16 { display: block; }
+    #d-16:checked ~ .calendar-layout label[for="d-16"] { background: var(--ink); color: var(--paper); }
+    #d-16:checked ~ .calendar-layout label[for="d-16"]::after { background: var(--lime); }
+    #d-17:checked ~ .calendar-layout .panel-17 { display: block; }
+    #d-17:checked ~ .calendar-layout label[for="d-17"] { background: var(--ink); color: var(--paper); }
+    #d-17:checked ~ .calendar-layout label[for="d-17"]::after { background: var(--lime); }
+    #d-18:checked ~ .calendar-layout .panel-18 { display: block; }
+    #d-18:checked ~ .calendar-layout label[for="d-18"] { background: var(--ink); color: var(--paper); }
+    #d-18:checked ~ .calendar-layout label[for="d-18"]::after { background: var(--lime); }
+    #d-19:checked ~ .calendar-layout .panel-19 { display: block; }
+    #d-19:checked ~ .calendar-layout label[for="d-19"] { background: var(--ink); color: var(--paper); }
+    #d-19:checked ~ .calendar-layout label[for="d-19"]::after { background: var(--lime); }
+    #d-20:checked ~ .calendar-layout .panel-20 { display: block; }
+    #d-20:checked ~ .calendar-layout label[for="d-20"] { background: var(--ink); color: var(--paper); }
+    #d-20:checked ~ .calendar-layout label[for="d-20"]::after { background: var(--lime); }
+  </style>
+</head>
+
+<body id="top">
+  <input type="checkbox" id="nav-toggle" class="state nav-check" aria-label="เปิด/ปิดเมนู">
+  <header class="navbar solid">
+    <a class="logo" href="index.html">LOOK UP<span>.</span></a>
+
+    <nav class="nav-links" aria-label="เมนูหลัก">
+      <a href="index.html">HOME</a>
+      <a href="gallery.html">GALLERY</a>
+      <a href="journal.html">JOURNAL</a>
+      <a href="calendar.html" class="active">CALENDAR</a>
+      <a class="mobile-only" href="about.html">ABOUT</a>
+    </nav>
+
+    <a href="about.html" class="nav-about">ABOUT ↗</a>
+    <label class="menu-toggle" for="nav-toggle" aria-label="เมนู"></label>
+  </header>
+
+  <main>
+    <section class="page-hero section-wrap">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">04 / Photo archive</div>
+          <h1>Memory <em>Calendar</em></h1>
+        </div>
+        <p class="section-note">Find the sky by date.</p>
+      </div>
+    </section>
+
+    <section class="calendar-section section-wrap" id="calendar">
+      <input class="state" type="radio" name="month" id="m-1" aria-label="January">
+      <input class="state" type="radio" name="month" id="m-2" aria-label="February">
+      <input class="state" type="radio" name="month" id="m-3" aria-label="March">
+      <input class="state" type="radio" name="month" id="m-4" aria-label="April">
+      <input class="state" type="radio" name="month" id="m-5" aria-label="May">
+      <input class="state" type="radio" name="month" id="m-6" aria-label="June">
+      <input class="state" type="radio" name="month" id="m-7" aria-label="July">
+      <input class="state" type="radio" name="month" id="m-8" aria-label="August">
+      <input class="state" type="radio" name="month" id="m-9" aria-label="September">
+      <input class="state" type="radio" name="month" id="m-10" checked aria-label="October">
+      <input class="state" type="radio" name="month" id="m-11" aria-label="November">
+      <input class="state" type="radio" name="month" id="m-12" aria-label="December">
+      <input class="state" type="radio" name="day" id="d-none" checked aria-label="ยังไม่ได้เลือกวัน">
+      <input class="state" type="radio" name="day" id="d-1" aria-label="12 JAN 2026 A Quiet Morning">
+      <input class="state" type="radio" name="day" id="d-2" aria-label="08 FEB 2026 Golden Hour">
+      <input class="state" type="radio" name="day" id="d-3" aria-label="15 MAR 2026 Cloud Stories">
+      <input class="state" type="radio" name="day" id="d-4" aria-label="20 APR 2026 Blue Afternoon">
+      <input class="state" type="radio" name="day" id="d-5" aria-label="06 MAY 2026 Before the Rain">
+      <input class="state" type="radio" name="day" id="d-6" aria-label="18 JUN 2026 Last Light">
+      <input class="state" type="radio" name="day" id="d-7" aria-label="02 JUL 2026 Morning Glow">
+      <input class="state" type="radio" name="day" id="d-8" aria-label="14 JUL 2026 Cotton Clouds">
+      <input class="state" type="radio" name="day" id="d-9" aria-label="26 JUL 2026 Pastel Evening">
+      <input class="state" type="radio" name="day" id="d-10" aria-label="05 AUG 2026 Open Blue">
+      <input class="state" type="radio" name="day" id="d-11" aria-label="17 AUG 2026 A New Beginning">
+      <input class="state" type="radio" name="day" id="d-12" aria-label="29 AUG 2026 Cloudy Mood">
+      <input class="state" type="radio" name="day" id="d-13" aria-label="04 SEP 2026 Orange Horizon">
+      <input class="state" type="radio" name="day" id="d-14" aria-label="12 SEP 2026 Simply Blue">
+      <input class="state" type="radio" name="day" id="d-15" aria-label="21 SEP 2026 Soft Sunrise">
+      <input class="state" type="radio" name="day" id="d-16" aria-label="02 OCT 2026 Passing Clouds">
+      <input class="state" type="radio" name="day" id="d-17" aria-label="09 OCT 2026 Golden Goodbye">
+      <input class="state" type="radio" name="day" id="d-18" aria-label="16 OCT 2026 Blue Escape">
+      <input class="state" type="radio" name="day" id="d-19" aria-label="22 OCT 2026 Dreamy Clouds">
+      <input class="state" type="radio" name="day" id="d-20" aria-label="27 OCT 2026 Until Tomorrow">
+
+      <div class="calendar-layout">
+        <div class="calendar-box">
+          <div class="month-chips">
+            <label for="m-1" class="has-photo">JAN</label>
+            <label for="m-2" class="has-photo">FEB</label>
+            <label for="m-3" class="has-photo">MAR</label>
+            <label for="m-4" class="has-photo">APR</label>
+            <label for="m-5" class="has-photo">MAY</label>
+            <label for="m-6" class="has-photo">JUN</label>
+            <label for="m-7" class="has-photo">JUL</label>
+            <label for="m-8" class="has-photo">AUG</label>
+            <label for="m-9" class="has-photo">SEP</label>
+            <label for="m-10" class="has-photo">OCT</label>
+            <label for="m-11">NOV</label>
+            <label for="m-12">DEC</label>
+          </div>
+
+          <div class="month month-1">
+            <div class="calendar-top">
+              <span class="cal-nav disabled" aria-hidden="true">←</span>
+              <h3>January 2026<small>01 PHOTO</small></h3>
+              <label class="cal-nav" for="m-2" aria-label="เดือนถัดไป">→</label>
+            </div>
+
+            <div class="calendar-weekdays">
+              <span>SUN</span><span>MON</span><span>TUE</span>
+              <span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+            </div>
+
+            <div class="calendar-days">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
+              <span>6</span>
+              <span>7</span>
+              <span>8</span>
+              <span>9</span>
+              <span>10</span>
+              <span>11</span>
+              <label class="has-photo" for="d-1" aria-label="12 JAN 2026 — A Quiet Morning">12</label>
+              <span>13</span>
+              <span>14</span>
+              <span>15</span>
+              <span>16</span>
+              <span>17</span>
+              <span>18</span>
+              <span>19</span>
+              <span>20</span>
+              <span>21</span>
+              <span>22</span>
+              <span>23</span>
+              <span>24</span>
+              <span>25</span>
+              <span>26</span>
+              <span>27</span>
+              <span>28</span>
+              <span>29</span>
+              <span>30</span>
+              <span>31</span>
+            </div>
+          </div>
+          <div class="month month-2">
+            <div class="calendar-top">
+              <label class="cal-nav" for="m-1" aria-label="เดือนก่อนหน้า">←</label>
+              <h3>February 2026<small>01 PHOTO</small></h3>
+              <label class="cal-nav" for="m-3" aria-label="เดือนถัดไป">→</label>
+            </div>
+
+            <div class="calendar-weekdays">
+              <span>SUN</span><span>MON</span><span>TUE</span>
+              <span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+            </div>
+
+            <div class="calendar-days">
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
+              <span>6</span>
+              <span>7</span>
+              <label class="has-photo" for="d-2" aria-label="08 FEB 2026 — Golden Hour">8</label>
+              <span>9</span>
+              <span>10</span>
+              <span>11</span>
+              <span>12</span>
+              <span>13</span>
+              <span>14</span>
+              <span>15</span>
+              <span>16</span>
+              <span>17</span>
+              <span>18</span>
+              <span>19</span>
+              <span>20</span>
+              <span>21</span>
+              <span>22</span>
+              <span>23</span>
+              <span>24</span>
+              <span>25</span>
+              <span>26</span>
+              <span>27</span>
+              <span>28</span>
+            </div>
+          </div>
+          <div class="month month-3">
+            <div class="calendar-top">
+              <label class="cal-nav" for="m-2" aria-label="เดือนก่อนหน้า">←</label>
+              <h3>March 2026<small>01 PHOTO</small></h3>
+              <label class="cal-nav" for="m-4" aria-label="เดือนถัดไป">→</label>
+            </div>
+
+            <div class="calendar-weekdays">
+              <span>SUN</span><span>MON</span><span>TUE</span>
+              <span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+            </div>
+
+            <div class="calendar-days">
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
+              <span>6</span>
+              <span>7</span>
+              <span>8</span>
+              <span>9</span>
+              <span>10</span>
+              <span>11</span>
+              <span>12</span>
+              <span>13</span>
+              <span>14</span>
+              <label class="has-photo" for="d-3" aria-label="15 MAR 2026 — Cloud Stories">15</label>
+              <span>16</span>
+              <span>17</span>
+              <span>18</span>
+              <span>19</span>
+              <span>20</span>
+              <span>21</span>
+              <span>22</span>
+              <span>23</span>
+              <span>24</span>
+              <span>25</span>
+              <span>26</span>
+              <span>27</span>
+              <span>28</span>
+              <span>29</span>
+              <span>30</span>
+              <span>31</span>
+            </div>
+          </div>
+          <div class="month month-4">
+            <div class="calendar-top">
+              <label class="cal-nav" for="m-3" aria-label="เดือนก่อนหน้า">←</label>
+              <h3>April 2026<small>01 PHOTO</small></h3>
+              <label class="cal-nav" for="m-5" aria-label="เดือนถัดไป">→</label>
+            </div>
+
+            <div class="calendar-weekdays">
+              <span>SUN</span><span>MON</span><span>TUE</span>
+              <span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+            </div>
+
+            <div class="calendar-days">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
+              <span>6</span>
+              <span>7</span>
+              <span>8</span>
+              <span>9</span>
+              <span>10</span>
+              <span>11</span>
+              <span>12</span>
+              <span>13</span>
+              <span>14</span>
+              <span>15</span>
+              <span>16</span>
+              <span>17</span>
+              <span>18</span>
+              <span>19</span>
+              <label class="has-photo" for="d-4" aria-label="20 APR 2026 — Blue Afternoon">20</label>
+              <span>21</span>
+              <span>22</span>
+              <span>23</span>
+              <span>24</span>
+              <span>25</span>
+              <span>26</span>
+              <span>27</span>
+              <span>28</span>
+              <span>29</span>
+              <span>30</span>
+            </div>
+          </div>
+          <div class="month month-5">
+            <div class="calendar-top">
+              <label class="cal-nav" for="m-4" aria-label="เดือนก่อนหน้า">←</label>
+              <h3>May 2026<small>01 PHOTO</small></h3>
+              <label class="cal-nav" for="m-6" aria-label="เดือนถัดไป">→</label>
+            </div>
+
+            <div class="calendar-weekdays">
+              <span>SUN</span><span>MON</span><span>TUE</span>
+              <span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+            </div>
+
+            <div class="calendar-days">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
+              <label class="has-photo" for="d-5" aria-label="06 MAY 2026 — Before the Rain">6</label>
+              <span>7</span>
+              <span>8</span>
+              <span>9</span>
+              <span>10</span>
+              <span>11</span>
+              <span>12</span>
+              <span>13</span>
+              <span>14</span>
+              <span>15</span>
+              <span>16</span>
+              <span>17</span>
+              <span>18</span>
+              <span>19</span>
+              <span>20</span>
+              <span>21</span>
+              <span>22</span>
+              <span>23</span>
+              <span>24</span>
+              <span>25</span>
+              <span>26</span>
+              <span>27</span>
+              <span>28</span>
+              <span>29</span>
+              <span>30</span>
+              <span>31</span>
+            </div>
+          </div>
+          <div class="month month-6">
+            <div class="calendar-top">
+              <label class="cal-nav" for="m-5" aria-label="เดือนก่อนหน้า">←</label>
+              <h3>June 2026<small>01 PHOTO</small></h3>
+              <label class="cal-nav" for="m-7" aria-label="เดือนถัดไป">→</label>
+            </div>
+
+            <div class="calendar-weekdays">
+              <span>SUN</span><span>MON</span><span>TUE</span>
+              <span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+            </div>
+
+            <div class="calendar-days">
+              <span aria-hidden="true"></span>
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
+              <span>6</span>
+              <span>7</span>
+              <span>8</span>
+              <span>9</span>
+              <span>10</span>
+              <span>11</span>
+              <span>12</span>
+              <span>13</span>
+              <span>14</span>
+              <span>15</span>
+              <span>16</span>
+              <span>17</span>
+              <label class="has-photo" for="d-6" aria-label="18 JUN 2026 — Last Light">18</label>
+              <span>19</span>
+              <span>20</span>
+              <span>21</span>
+              <span>22</span>
+              <span>23</span>
+              <span>24</span>
+              <span>25</span>
+              <span>26</span>
+              <span>27</span>
+              <span>28</span>
+              <span>29</span>
+              <span>30</span>
+            </div>
+          </div>
+          <div class="month month-7">
+            <div class="calendar-top">
+              <label class="cal-nav" for="m-6" aria-label="เดือนก่อนหน้า">←</label>
+              <h3>July 2026<small>03 PHOTOS</small></h3>
+              <label class="cal-nav" for="m-8" aria-label="เดือนถัดไป">→</label>
+            </div>
+
+            <div class="calendar-weekdays">
+              <span>SUN</span><span>MON</span><span>TUE</span>
+              <span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+            </div>
+
+            <div class="calendar-days">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span>1</span>
+              <label class="has-photo" for="d-7" aria-label="02 JUL 2026 — Morning Glow">2</label>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
+              <span>6</span>
+              <span>7</span>
+              <span>8</span>
+              <span>9</span>
+              <span>10</span>
+              <span>11</span>
+              <span>12</span>
+              <span>13</span>
+              <label class="has-photo" for="d-8" aria-label="14 JUL 2026 — Cotton Clouds">14</label>
+              <span>15</span>
+              <span>16</span>
+              <span>17</span>
+              <span>18</span>
+              <span>19</span>
+              <span>20</span>
+              <span>21</span>
+              <span>22</span>
+              <span>23</span>
+              <span>24</span>
+              <span>25</span>
+              <label class="has-photo" for="d-9" aria-label="26 JUL 2026 — Pastel Evening">26</label>
+              <span>27</span>
+              <span>28</span>
+              <span>29</span>
+              <span>30</span>
+              <span>31</span>
+            </div>
+          </div>
+          <div class="month month-8">
+            <div class="calendar-top">
+              <label class="cal-nav" for="m-7" aria-label="เดือนก่อนหน้า">←</label>
+              <h3>August 2026<small>03 PHOTOS</small></h3>
+              <label class="cal-nav" for="m-9" aria-label="เดือนถัดไป">→</label>
+            </div>
+
+            <div class="calendar-weekdays">
+              <span>SUN</span><span>MON</span><span>TUE</span>
+              <span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+            </div>
+
+            <div class="calendar-days">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <span>4</span>
+              <label class="has-photo" for="d-10" aria-label="05 AUG 2026 — Open Blue">5</label>
+              <span>6</span>
+              <span>7</span>
+              <span>8</span>
+              <span>9</span>
+              <span>10</span>
+              <span>11</span>
+              <span>12</span>
+              <span>13</span>
+              <span>14</span>
+              <span>15</span>
+              <span>16</span>
+              <label class="has-photo" for="d-11" aria-label="17 AUG 2026 — A New Beginning">17</label>
+              <span>18</span>
+              <span>19</span>
+              <span>20</span>
+              <span>21</span>
+              <span>22</span>
+              <span>23</span>
+              <span>24</span>
+              <span>25</span>
+              <span>26</span>
+              <span>27</span>
+              <span>28</span>
+              <label class="has-photo" for="d-12" aria-label="29 AUG 2026 — Cloudy Mood">29</label>
+              <span>30</span>
+              <span>31</span>
+            </div>
+          </div>
+          <div class="month month-9">
+            <div class="calendar-top">
+              <label class="cal-nav" for="m-8" aria-label="เดือนก่อนหน้า">←</label>
+              <h3>September 2026<small>03 PHOTOS</small></h3>
+              <label class="cal-nav" for="m-10" aria-label="เดือนถัดไป">→</label>
+            </div>
+
+            <div class="calendar-weekdays">
+              <span>SUN</span><span>MON</span><span>TUE</span>
+              <span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+            </div>
+
+            <div class="calendar-days">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <label class="has-photo" for="d-13" aria-label="04 SEP 2026 — Orange Horizon">4</label>
+              <span>5</span>
+              <span>6</span>
+              <span>7</span>
+              <span>8</span>
+              <span>9</span>
+              <span>10</span>
+              <span>11</span>
+              <label class="has-photo" for="d-14" aria-label="12 SEP 2026 — Simply Blue">12</label>
+              <span>13</span>
+              <span>14</span>
+              <span>15</span>
+              <span>16</span>
+              <span>17</span>
+              <span>18</span>
+              <span>19</span>
+              <span>20</span>
+              <label class="has-photo" for="d-15" aria-label="21 SEP 2026 — Soft Sunrise">21</label>
+              <span>22</span>
+              <span>23</span>
+              <span>24</span>
+              <span>25</span>
+              <span>26</span>
+              <span>27</span>
+              <span>28</span>
+              <span>29</span>
+              <span>30</span>
+            </div>
+          </div>
+          <div class="month month-10">
+            <div class="calendar-top">
+              <label class="cal-nav" for="m-9" aria-label="เดือนก่อนหน้า">←</label>
+              <h3>October 2026<small>05 PHOTOS</small></h3>
+              <label class="cal-nav" for="m-11" aria-label="เดือนถัดไป">→</label>
+            </div>
+
+            <div class="calendar-weekdays">
+              <span>SUN</span><span>MON</span><span>TUE</span>
+              <span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+            </div>
+
+            <div class="calendar-days">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span>1</span>
+              <label class="has-photo" for="d-16" aria-label="02 OCT 2026 — Passing Clouds">2</label>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
+              <span>6</span>
+              <span>7</span>
+              <span>8</span>
+              <label class="has-photo" for="d-17" aria-label="09 OCT 2026 — Golden Goodbye">9</label>
+              <span>10</span>
+              <span>11</span>
+              <span>12</span>
+              <span>13</span>
+              <span>14</span>
+              <span>15</span>
+              <label class="has-photo" for="d-18" aria-label="16 OCT 2026 — Blue Escape">16</label>
+              <span>17</span>
+              <span>18</span>
+              <span>19</span>
+              <span>20</span>
+              <span>21</span>
+              <label class="has-photo" for="d-19" aria-label="22 OCT 2026 — Dreamy Clouds">22</label>
+              <span>23</span>
+              <span>24</span>
+              <span>25</span>
+              <span>26</span>
+              <label class="has-photo" for="d-20" aria-label="27 OCT 2026 — Until Tomorrow">27</label>
+              <span>28</span>
+              <span>29</span>
+              <span>30</span>
+              <span>31</span>
+            </div>
+          </div>
+          <div class="month month-11">
+            <div class="calendar-top">
+              <label class="cal-nav" for="m-10" aria-label="เดือนก่อนหน้า">←</label>
+              <h3>November 2026<small>NO PHOTOS YET</small></h3>
+              <label class="cal-nav" for="m-12" aria-label="เดือนถัดไป">→</label>
+            </div>
+
+            <div class="calendar-weekdays">
+              <span>SUN</span><span>MON</span><span>TUE</span>
+              <span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+            </div>
+
+            <div class="calendar-days">
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
+              <span>6</span>
+              <span>7</span>
+              <span>8</span>
+              <span>9</span>
+              <span>10</span>
+              <span>11</span>
+              <span>12</span>
+              <span>13</span>
+              <span>14</span>
+              <span>15</span>
+              <span>16</span>
+              <span>17</span>
+              <span>18</span>
+              <span>19</span>
+              <span>20</span>
+              <span>21</span>
+              <span>22</span>
+              <span>23</span>
+              <span>24</span>
+              <span>25</span>
+              <span>26</span>
+              <span>27</span>
+              <span>28</span>
+              <span>29</span>
+              <span>30</span>
+            </div>
+          </div>
+          <div class="month month-12">
+            <div class="calendar-top">
+              <label class="cal-nav" for="m-11" aria-label="เดือนก่อนหน้า">←</label>
+              <h3>December 2026<small>NO PHOTOS YET</small></h3>
+              <span class="cal-nav disabled" aria-hidden="true">→</span>
+            </div>
+
+            <div class="calendar-weekdays">
+              <span>SUN</span><span>MON</span><span>TUE</span>
+              <span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+            </div>
+
+            <div class="calendar-days">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
+              <span>6</span>
+              <span>7</span>
+              <span>8</span>
+              <span>9</span>
+              <span>10</span>
+              <span>11</span>
+              <span>12</span>
+              <span>13</span>
+              <span>14</span>
+              <span>15</span>
+              <span>16</span>
+              <span>17</span>
+              <span>18</span>
+              <span>19</span>
+              <span>20</span>
+              <span>21</span>
+              <span>22</span>
+              <span>23</span>
+              <span>24</span>
+              <span>25</span>
+              <span>26</span>
+              <span>27</span>
+              <span>28</span>
+              <span>29</span>
+              <span>30</span>
+              <span>31</span>
+            </div>
+          </div>
+
+          <p class="calendar-legend"><i></i>วันที่มีภาพถ่าย — คลิกเพื่อดูรายละเอียด</p>
+        </div>
+
+        <div class="calendar-result">
+          <div class="result-panel panel-none">
+            <span class="result-label">SELECT A DATE</span>
+            <h3>Find your<br><em>sky moment.</em></h3>
+            <p>เลือกวันที่มีจุดสีเขียวในปฏิทิน เพื่อดูภาพถ่ายในวันนั้น</p>
+          </div>
+          <div class="result-panel panel-1">
+            <span class="result-label">12 JAN 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — เช้าวันหนึ่งที่ท้องฟ้าเริ่มเปลี่ยนสี แสงแดดอ่อน ๆ ทำให้บรรยากาศดูสงบ</p>
+            <div class="result-stage sunrise">
+              <a class="polaroid" href="gallery.html#photo-1">
+                <span class="polaroid-photo"><img src="images/sky-01.jpg" alt="A Quiet Morning" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>A Quiet Morning</strong><small>SUNRISE</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-1">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-2">
+            <span class="result-label">08 FEB 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — ช่วงเวลาที่ท้องฟ้าเปลี่ยนเป็นสีส้มทอง ก่อนที่พระอาทิตย์จะลับขอบฟ้า</p>
+            <div class="result-stage sunset">
+              <a class="polaroid" href="gallery.html#photo-2">
+                <span class="polaroid-photo"><img src="images/sky-02.jpg" alt="Golden Hour" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Golden Hour</strong><small>SUNSET</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-2">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-3">
+            <span class="result-label">15 MAR 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — กลุ่มเมฆที่ลอยผ่านท้องฟ้า แต่ละก้อนมีรูปร่างและความสวยงามต่างกัน</p>
+            <div class="result-stage cloudy">
+              <a class="polaroid" href="gallery.html#photo-3">
+                <span class="polaroid-photo"><img src="images/sky-03.jpg" alt="Cloud Stories" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Cloud Stories</strong><small>CLOUDY</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-3">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-4">
+            <span class="result-label">20 APR 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — ท้องฟ้าสีฟ้าในช่วงบ่าย เป็นวันที่อากาศสดใสและเหมาะกับการออกไปถ่ายรูป</p>
+            <div class="result-stage blue">
+              <a class="polaroid" href="gallery.html#photo-4">
+                <span class="polaroid-photo"><img src="images/sky-09.jpg" alt="Blue Afternoon" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Blue Afternoon</strong><small>BLUE</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-4">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-5">
+            <span class="result-label">06 MAY 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — ก่อนที่ฝนจะตก ท้องฟ้าถูกปกคลุมด้วยเมฆสีเข้มและให้บรรยากาศที่แตกต่าง</p>
+            <div class="result-stage cloudy">
+              <a class="polaroid" href="gallery.html#photo-5">
+                <span class="polaroid-photo"><img src="images/sky-24.jpg" alt="Before the Rain" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Before the Rain</strong><small>CLOUDY</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-5">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-6">
+            <span class="result-label">18 JUN 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — แสงสุดท้ายของวัน เป็นช่วงเวลาสั้น ๆ ที่อยากเก็บไว้ในความทรงจำ</p>
+            <div class="result-stage sunset">
+              <a class="polaroid" href="gallery.html#photo-6">
+                <span class="polaroid-photo"><img src="images/sky-10.jpg" alt="Last Light" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Last Light</strong><small>SUNSET</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-6">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-7">
+            <span class="result-label">02 JUL 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — แสงสีทองยามเช้าที่ค่อย ๆ ส่องผ่านขอบฟ้า เริ่มต้นวันใหม่อย่างสดใส</p>
+            <div class="result-stage sunrise">
+              <a class="polaroid" href="gallery.html#photo-7">
+                <span class="polaroid-photo"><img src="images/sky-11.jpg" alt="Morning Glow" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Morning Glow</strong><small>SUNRISE</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-7">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-8">
+            <span class="result-label">14 JUL 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — ก้อนเมฆสีขาวนุ่มคล้ายปุยฝ้าย ลอยอยู่บนท้องฟ้าสีฟ้าอ่อน</p>
+            <div class="result-stage cloudy">
+              <a class="polaroid" href="gallery.html#photo-8">
+                <span class="polaroid-photo"><img src="images/sky-12.jpg" alt="Cotton Clouds" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Cotton Clouds</strong><small>CLOUDY</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-8">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-9">
+            <span class="result-label">26 JUL 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — ท้องฟ้ายามเย็นที่แต่งแต้มด้วยสีชมพูและม่วง เป็นช่วงเวลาที่ดูอบอุ่น</p>
+            <div class="result-stage sunset">
+              <a class="polaroid" href="gallery.html#photo-9">
+                <span class="polaroid-photo"><img src="images/sky-13.jpg" alt="Pastel Evening" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Pastel Evening</strong><small>SUNSET</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-9">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-10">
+            <span class="result-label">05 AUG 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — ท้องฟ้าสีฟ้ากว้างสุดสายตา พร้อมแสงแดดที่ทำให้ทุกอย่างดูสดใส</p>
+            <div class="result-stage blue">
+              <a class="polaroid" href="gallery.html#photo-10">
+                <span class="polaroid-photo"><img src="images/sky-14.jpg" alt="Open Blue" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Open Blue</strong><small>BLUE</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-10">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-11">
+            <span class="result-label">17 AUG 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — พระอาทิตย์เริ่มขึ้นเหนือขอบฟ้า พร้อมแสงแรกที่ทำให้เช้าวันนั้นพิเศษ</p>
+            <div class="result-stage sunrise">
+              <a class="polaroid" href="gallery.html#photo-11">
+                <span class="polaroid-photo"><img src="images/hero-sky.jpg" alt="A New Beginning" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>A New Beginning</strong><small>SUNRISE</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-11">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-12">
+            <span class="result-label">29 AUG 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — วันที่ท้องฟ้าเต็มไปด้วยเมฆ ให้ความรู้สึกสงบและแตกต่างจากวันอื่น</p>
+            <div class="result-stage cloudy">
+              <a class="polaroid" href="gallery.html#photo-12">
+                <span class="polaroid-photo"><img src="images/sky-26.jpg" alt="Cloudy Mood" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Cloudy Mood</strong><small>CLOUDY</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-12">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-13">
+            <span class="result-label">04 SEP 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — เส้นขอบฟ้าสีส้มในช่วงเย็น แสงอาทิตย์ค่อย ๆ จางหายไปอย่างช้า ๆ</p>
+            <div class="result-stage sunset">
+              <a class="polaroid" href="gallery.html#photo-13">
+                <span class="polaroid-photo"><img src="images/sky-17.jpg" alt="Orange Horizon" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Orange Horizon</strong><small>SUNSET</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-13">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-14">
+            <span class="result-label">12 SEP 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — ท้องฟ้าสีฟ้าเรียบง่ายที่ทำให้รู้สึกสบายตา เป็นภาพธรรมดาที่น่าจดจำ</p>
+            <div class="result-stage blue">
+              <a class="polaroid" href="gallery.html#photo-14">
+                <span class="polaroid-photo"><img src="images/sky-18.jpg" alt="Simply Blue" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Simply Blue</strong><small>BLUE</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-14">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-15">
+            <span class="result-label">21 SEP 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — แสงแดดยามเช้าที่นุ่มนวล ค่อย ๆ เปลี่ยนสีของท้องฟ้าให้สว่างขึ้น</p>
+            <div class="result-stage sunrise">
+              <a class="polaroid" href="gallery.html#photo-15">
+                <span class="polaroid-photo"><img src="images/sky-19.jpg" alt="Soft Sunrise" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Soft Sunrise</strong><small>SUNRISE</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-15">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-16">
+            <span class="result-label">02 OCT 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — เมฆที่กำลังเคลื่อนตัวผ่านท้องฟ้า เปลี่ยนรูปร่างไปตามสายลม</p>
+            <div class="result-stage cloudy">
+              <a class="polaroid" href="gallery.html#photo-16">
+                <span class="polaroid-photo"><img src="images/sky-20.jpg" alt="Passing Clouds" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Passing Clouds</strong><small>CLOUDY</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-16">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-17">
+            <span class="result-label">09 OCT 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — แสงสีทองในช่วงท้ายของวัน เป็นอีกหนึ่งช่วงเวลาที่อยากหยุดเก็บไว้</p>
+            <div class="result-stage sunset">
+              <a class="polaroid" href="gallery.html#photo-17">
+                <span class="polaroid-photo"><img src="images/sky-21.jpg" alt="Golden Goodbye" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Golden Goodbye</strong><small>SUNSET</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-17">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-18">
+            <span class="result-label">16 OCT 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — มองขึ้นไปเห็นท้องฟ้าสีฟ้าสดใส ช่วยเติมความสดชื่นให้กับวันธรรมดา</p>
+            <div class="result-stage blue">
+              <a class="polaroid" href="gallery.html#photo-18">
+                <span class="polaroid-photo"><img src="images/sky-22.jpg" alt="Blue Escape" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Blue Escape</strong><small>BLUE</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-18">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-19">
+            <span class="result-label">22 OCT 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — กลุ่มเมฆที่เรียงตัวอย่างสวยงามราวกับภาพวาดบนผืนฟ้า</p>
+            <div class="result-stage cloudy">
+              <a class="polaroid" href="gallery.html#photo-19">
+                <span class="polaroid-photo"><img src="images/sky-23.jpg" alt="Dreamy Clouds" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Dreamy Clouds</strong><small>CLOUDY</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-19">VIEW PHOTO ↗</a>
+          </div>
+          <div class="result-panel panel-20">
+            <span class="result-label">27 OCT 2026</span>
+            <h3>Your sky<br><em>memories.</em></h3>
+            <p>พบภาพถ่าย 1 ภาพในวันนี้ — พระอาทิตย์กำลังลับขอบฟ้า ปิดท้ายวันด้วยสีสันที่สวยงาม</p>
+            <div class="result-stage sunset">
+              <a class="polaroid" href="gallery.html#photo-20">
+                <span class="polaroid-photo"><img src="images/sky-25.jpg" alt="Until Tomorrow" loading="lazy"></span>
+                <span class="polaroid-caption"><strong>Until Tomorrow</strong><small>SUNSET</small></span>
+              </a>
+            </div>
+            <a class="text-link" href="gallery.html#photo-20">VIEW PHOTO ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="logo" href="index.html">LOOK UP<span>.</span></a>
+    <p>MADE WITH MOMENTS &amp; MEMORIES.</p>
+    <a class="to-top" href="#top">© 2026 PERSONAL SKY ARCHIVE — BACK TO TOP ↑</a>
+  </footer>
+</body>
+</html>
