@@ -1380,3 +1380,12 @@ label.cal-nav:hover { background: var(--ink); color: var(--paper); border-color:
 
   .slide-progress i { transform: scaleX(1); }
 }
+/* COLLECTION PAGE (collection.html) — ใช้ .object-page เดิม แต่เป็นหน้าปกติ */
+.detail { --tint: #d9d2c2; min-height: 100vh; background: color-mix(in srgb, var(--tint) 58%, var(--paper)); }
+.detail[data-cat="sunrise"] { --tint: var(--tint-sunrise); }
+.detail[data-cat="sunset"]  { --tint: var(--tint-sunset); }
+.detail[data-cat="cloudy"]  { --tint: var(--tint-cloudy); }
+.detail[data-cat="blue"]    { --tint: var(--tint-blue); }
+.detail .object-stage  { animation: fadeUp .8s var(--ease) both; }
+.detail .object-info   { animation: fadeUp .8s .12s var(--ease) both; }
+.detail .lightbox-close { position: absolute; top: 96px; }
