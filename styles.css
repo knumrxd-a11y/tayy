@@ -1389,3 +1389,222 @@ label.cal-nav:hover { background: var(--ink); color: var(--paper); border-color:
 .detail .object-stage  { animation: fadeUp .8s var(--ease) both; }
 .detail .object-info   { animation: fadeUp .8s .12s var(--ease) both; }
 .detail .lightbox-close { position: absolute; top: 96px; }
+/* =====================================================
+   EXTRAS: hover ขยาย / เวลาของวัน / Surprise me / ลูกศรข้าง / เคอร์เซอร์ดวงอาทิตย์
+   ===================================================== */
+
+/* 1) รูปขยาย (หยุดลอยมีอยู่แล้วที่ .hero-stage:hover) */
+.hero-main, .photo-card { transition-property: transform, box-shadow, scale; }
+.hero-stage:hover .hero-main { scale: 1.06; }
+.photo-card:hover, .photo-card:focus-visible { scale: 1.03; }
+
+/* 3) โทนพื้นหลังตามเวลา (ค่าเริ่มต้น = ช่วงกลางวัน) */
+body { transition: background-color 1s ease; }
+html[data-time="morning"] { --paper: #f8e9d4; --paper-2: #f2dcc0; }
+html[data-time="evening"] { --paper: #f1d6c3; --paper-2: #e9c4ab; }
+html[data-time="night"]   { --paper: #b9c0d6; --paper-2: #a9b1ca; --muted: #4a4858; }
+
+/* 2) ปุ่ม Surprise me */
+.surprise-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 90;
+  background: var(--lime);
+  box-shadow: 0 8px 20px -8px rgba(40, 30, 10, .4);
+  font-family: inherit;
+}
+
+/* 4) ลูกศรซ้าย–ขวาในหน้ารายละเอียด */
+.side-arrow {
+  position: fixed;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 4;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  font-size: 26px;
+  line-height: 1;
+  background: rgba(255, 255, 255, .3);
+  transition: background .3s, color .3s;
+}
+.side-arrow:hover { background: var(--ink); color: var(--paper); }
+.side-arrow.left { left: 16px; }
+.side-arrow.right { right: 16px; }
+@media (max-width: 960px) { .side-arrow { top: auto; bottom: 20px; translate: none; } .side-arrow.left { left: 16px; } .side-arrow.right { left: 72px; right: auto; } }
+
+/* =====================================================
+   EXTRAS 2: progress bar / reveal / marquee / ทักทาย / เมฆลอย / parallax
+   ===================================================== */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  z-index: 1000; pointer-events: none;
+  background: linear-gradient(90deg, var(--lime), #f6c453, #e8963a);
+}
+
+.hero-main { transition-property: transform, box-shadow, scale, translate; }
+.hero-stage .back { transition: translate .45s ease-out; }
+
+.greet {
+  display: inline-block; margin-right: 10px; padding: 3px 10px;
+  border-radius: 999px; background: var(--lime); color: var(--ink);
+  font-size: .85em; font-weight: 700; letter-spacing: 1.5px;
+}
+
+@keyframes cardIn { from { opacity: 0; translate: 0 36px; } to { opacity: 1; translate: 0 0; } }
+@keyframes skyDrift {
+  from { transform: translate3d(-4%, -2%, 0); }
+  to   { transform: translate3d(4%, 3%, 0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* เมฆจาง ๆ ลอยอยู่หลังเนื้อหา */
+  html::before {
+    content: ""; position: fixed; inset: -10%; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(34% 26% at 18% 22%, rgba(255, 255, 255, .6), transparent 70%),
+      radial-gradient(30% 24% at 78% 58%, rgba(255, 214, 170, .35), transparent 70%),
+      radial-gradient(38% 28% at 40% 90%, rgba(255, 255, 255, .45), transparent 70%);
+    animation: skyDrift 38s ease-in-out infinite alternate;
+  }
+  .js .photo-card:not(.in) { opacity: 0; }
+  .photo-card.in { animation: cardIn .8s var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms); }
+  }
+
+/* =====================================================
+   EXTRAS 3: ความนุ่มของแอนิเมชัน + ลูกเล่นเพิ่ม
+   ===================================================== */
+:root { --ease-out: cubic-bezier(.16, 1, .3, 1); }
+
+/* ปุ่มแม่เหล็ก: translate ลื่น ๆ */
+.primary-btn { transition: background .3s, color .3s, transform .4s var(--ease), translate .45s var(--ease-out); }
+.pill { transition: background .3s, color .3s, translate .45s var(--ease-out); }
+
+/* การ์ดเอียง 3D */
+.gallery-grid { perspective: 1400px; }
+.photo-card {
+  transition: transform .8s var(--ease), box-shadow .8s var(--ease), scale .6s var(--ease-out), rotate .4s var(--ease-out);
+  will-change: transform;
+}
+
+/* พื้นหลังคำคมสำหรับ parallax */
+.quote-section { overflow: hidden; }
+.quote-bg { scale: 1.15; will-change: translate; }
+
+/* ชื่อหน้าใหญ่โผล่ทีละคำ */
+.word { display: inline-block; overflow: hidden; vertical-align: bottom; padding: 0 .06em .14em 0; margin-bottom: -.14em; }
+.word > span { display: inline-block; }
+
+/* เปลี่ยนหน้าแบบ cross-fade (เบราว์เซอร์ที่รองรับ) */
+@view-transition { navigation: auto; }
+.navbar { view-transition-name: site-nav; }
+::view-transition-group(root) { animation-duration: .55s; animation-timing-function: var(--ease-out); }
+
+@keyframes wordUp { from { translate: 0 110%; opacity: 0; } to { translate: 0 0; opacity: 1; } }
+@keyframes twinkle { from { opacity: .35; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-content { animation: fadeUp 1.2s var(--ease-out) both; }
+  .word > span { animation: wordUp 1s var(--ease-out) both; animation-delay: calc(var(--w, 0) * 75ms + 120ms); }
+  .photo-card.in { animation-duration: 1s; animation-timing-function: var(--ease-out); }
+
+  /* กลางคืน: ดาวระยิบระยับ */
+  html[data-time="night"]::after {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image:
+      radial-gradient(1.6px 1.6px at 8% 14%, #fff, transparent),
+      radial-gradient(1.2px 1.2px at 22% 62%, #fff, transparent),
+      radial-gradient(1.8px 1.8px at 37% 28%, #fff, transparent),
+      radial-gradient(1.2px 1.2px at 51% 80%, #fff, transparent),
+      radial-gradient(1.6px 1.6px at 64% 18%, #fff, transparent),
+      radial-gradient(1.4px 1.4px at 76% 46%, #fff, transparent),
+      radial-gradient(1.8px 1.8px at 88% 72%, #fff, transparent),
+      radial-gradient(1.2px 1.2px at 94% 24%, #fff, transparent);
+    animation: twinkle 3.5s ease-in-out infinite alternate;
+  }
+}
+
+/* =====================================================
+   EXTRAS 4: พื้นหลังมีชีวิต + hover ที่นุ่มขึ้น
+   ===================================================== */
+
+/* สีพื้นหลังตามช่วงเวลา (ค่าเริ่มต้น = กลางวัน) */
+html {
+  --b1: rgba(255, 255, 255, .75); --b2: rgba(176, 208, 240, .45); --b3: rgba(255, 214, 170, .42);
+  --orb: rgba(255, 236, 170, .7);  --glow: rgba(255, 255, 255, .5); --bokeh: rgba(255, 255, 255, .85);
+}
+html[data-time="morning"] {
+  --b1: rgba(255, 226, 190, .85); --b2: rgba(255, 186, 170, .45); --b3: rgba(196, 224, 250, .45);
+  --orb: rgba(255, 208, 140, .8);  --glow: rgba(255, 240, 200, .55); --bokeh: rgba(255, 232, 180, .9);
+}
+html[data-time="evening"] {
+  --b1: rgba(255, 168, 128, .5);  --b2: rgba(222, 150, 192, .45); --b3: rgba(255, 214, 150, .5);
+  --orb: rgba(255, 140, 100, .6); --glow: rgba(255, 200, 160, .5); --bokeh: rgba(255, 190, 150, .85);
+}
+html[data-time="night"] {
+  --b1: rgba(110, 124, 204, .5);  --b2: rgba(168, 138, 210, .42); --b3: rgba(84, 106, 172, .5);
+  --orb: rgba(238, 242, 255, .6); --glow: rgba(190, 200, 255, .45); --bokeh: rgba(214, 224, 255, .85);
+}
+
+@keyframes meshDrift {
+  0%   { transform: translate3d(-3%, -2%, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate3d(3%, 2%, 0) rotate(3deg) scale(1.06); }
+  100% { transform: translate3d(-2%, 3%, 0) rotate(-2deg) scale(1.02); }
+}
+@keyframes orbBreath {
+  from { transform: scale(.94); opacity: .75; }
+  to   { transform: scale(1.08); opacity: 1; }
+}
+@keyframes bokehRise {
+  0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+  15%  { opacity: .8; }
+  85%  { opacity: .8; }
+  100% { transform: translate3d(36px, -118vh, 0); opacity: 0; }
+}
+
+.bokeh { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.bokeh span {
+  position: absolute; bottom: -90px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--bokeh), transparent 70%);
+  animation: bokehRise linear infinite;
+}
+.bg-glow {
+  position: fixed; top: 0; left: 0; width: 560px; height: 560px; margin: -280px 0 0 -280px;
+  border-radius: 50%; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle, var(--glow), transparent 65%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* แสงสีไล่เฉด 3 ก้อน ลอยช้า ๆ */
+  html::before {
+    inset: -15%;
+    background:
+      radial-gradient(38% 30% at 16% 22%, var(--b1), transparent 70%),
+      radial-gradient(34% 30% at 82% 62%, var(--b2), transparent 70%),
+      radial-gradient(40% 32% at 42% 92%, var(--b3), transparent 70%),
+      radial-gradient(28% 24% at 64% 12%, var(--b2), transparent 70%);
+    animation: meshDrift 46s ease-in-out infinite alternate;
+  }
+  /* ดวงอาทิตย์/ดวงจันทร์เรืองแสงมุมขวาบน หายใจช้า ๆ */
+  body::before {
+    content: ""; position: fixed; top: -14vmax; right: -10vmax;
+    width: 48vmax; height: 48vmax; border-radius: 50%; z-index: -1; pointer-events: none;
+    background: radial-gradient(circle, var(--orb) 0%, transparent 68%);
+    animation: orbBreath 14s ease-in-out infinite alternate;
+  }
+}
+
+/* hover ของการ์ดรูป: ไม่ยกขึ้น (กันสั่นที่ขอบ) ใช้ขยายนุ่ม ๆ จังหวะเดียวกันทั้งหมด */
+.photo-card {
+  transition: transform .7s var(--ease-out), box-shadow .7s var(--ease-out), scale .7s var(--ease-out);
+}
+.photo-card:hover, .photo-card:focus-visible {
+  transform: rotate(0deg) translateY(0);
+  scale: 1.04;
+}
+.hero-main { transition: transform .8s var(--ease-out), box-shadow .8s var(--ease-out), scale .8s var(--ease-out), translate .2s linear; }
+.hero-stage:hover .hero-main { scale: 1.045; }
