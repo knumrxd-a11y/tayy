@@ -285,18 +285,8 @@ const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   upd();
 })();
 
-// 7.11 ปัดซ้าย/ขวาบนมือถือเพื่อเปลี่ยนภาพ (lightbox และหน้ารายละเอียด)
-(function () {
-  let sx = null;
-  addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; }, { passive: true });
-  addEventListener("touchend", function (e) {
-    if (sx === null) return;
-    const dx = e.changedTouches[0].clientX - sx; sx = null;
-    if (Math.abs(dx) < 70) return;
-    const nav = document.querySelector(".lightbox:target .object-nav, #detail .object-nav");
-    if (nav) nav.querySelectorAll("a")[dx > 0 ? 0 : 1].click();
-  });
-})();
+// 7.11 (ปิดแล้ว) เดิมปัดซ้าย/ขวาเพื่อเปลี่ยนภาพ — ตอนนี้ให้กดปุ่ม NEXT / PREVIOUS เท่านั้น
+// เพื่อให้ลากหมุนโพลารอยด์บนมือถือได้โดยไม่เปลี่ยนภาพเอง
 
 // 7.12 ชื่อแท็บเปลี่ยนเมื่อสลับไปแท็บอื่น
 (function () {

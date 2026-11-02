@@ -1435,7 +1435,7 @@ html[data-time="night"]   { --paper: #b9c0d6; --paper-2: #a9b1ca; --muted: #4a48
 .side-arrow:hover { background: var(--ink); color: var(--paper); }
 .side-arrow.left { left: 16px; }
 .side-arrow.right { right: 16px; }
-@media (max-width: 960px) { .side-arrow { top: auto; bottom: 20px; translate: none; } .side-arrow.left { left: 16px; } .side-arrow.right { left: 72px; right: auto; } }
+@media (max-width: 960px) { .side-arrow { display: none; } }
 
 /* =====================================================
    EXTRAS 2: progress bar / reveal / marquee / ทักทาย / เมฆลอย / parallax
