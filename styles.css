@@ -1761,6 +1761,7 @@ html { --b1: rgba(255,255,255,.5); --b2: rgba(150,170,188,.38); }
 .like-btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 .like-btn[aria-pressed="true"] .heart { fill: #ff6b86; stroke: #ff6b86; }
 .like-btn.pop .heart { animation: heartBeat .55s cubic-bezier(.3, 1.6, .5, 1); }
+.like-count { padding-left: 9px; margin-left: 2px; border-left: 1px solid currentColor; font-variant-numeric: tabular-nums; opacity: .75; }
 .heart-pop { position: absolute; left: 28px; top: 50%; pointer-events: none; font-style: normal; color: #ff6b86; animation: heartPop .85s ease-out forwards; }
 @keyframes heartBeat { 0% { transform: scale(1); } 35% { transform: scale(1.6); } 100% { transform: scale(1); } }
 @keyframes heartPop {

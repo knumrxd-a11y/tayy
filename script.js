@@ -575,6 +575,7 @@ function makeSpinner(el, o) {
 })();
 
 // ===== 10) ระบบถูกใจ (เก็บในเครื่องของผู้ชมด้วย localStorage) =====
+const Counts = {}; // จำนวนถูกใจรวมจากทุกคน (โหลดจาก /api/likes)
 const Likes = (function () {
   const KEY = "lookup-likes";
   let ids = [];
@@ -590,9 +591,21 @@ const Likes = (function () {
     reload: load,
     toggle: function (id) {
       const i = ids.indexOf(id);
+      const delta = i === -1 ? 1 : -1;
       if (i > -1) ids.splice(i, 1); else ids.push(id);
       save();
+      Counts[id] = Math.max(0, (Counts[id] || 0) + delta); // อัปเดตทันที
       document.dispatchEvent(new CustomEvent("likechange", { detail: { id: id } }));
+      fetch("/api/likes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: id, delta: delta })
+      }).then(function (r) { return r.json(); }).then(function (d) {
+        if (d && typeof d.count === "number") {
+          Counts[id] = d.count; // ใช้เลขจริงจากเซิร์ฟเวอร์
+          document.dispatchEvent(new CustomEvent("likechange", { detail: { id: id } }));
+        }
+      }).catch(function () {});
       return i === -1;
     }
   };
@@ -622,7 +635,7 @@ const Likes = (function () {
   function makeBtn(id) {
     const b = document.createElement("button");
     b.type = "button"; b.className = "pill like-btn"; b.dataset.id = id;
-    b.innerHTML = HEART + '<span class="like-text">LIKE</span>';
+    b.innerHTML = HEART + '<span class="like-text">LIKE</span><span class="like-count">0</span>';
     b.addEventListener("click", function () { press(b); });
     buttons.push(b);
     return b;
@@ -667,6 +680,7 @@ const Likes = (function () {
       const on = Likes.has(+b.dataset.id);
       b.setAttribute("aria-pressed", on ? "true" : "false");
       b.querySelector(".like-text").textContent = on ? "LIKED" : "LIKE";
+      b.querySelector(".like-count").textContent = Counts[+b.dataset.id] || 0;
     });
     document.querySelectorAll(".photo-card[data-pid]").forEach(function (c) { c.classList.toggle("is-liked", Likes.has(+c.dataset.pid)); });
     document.querySelectorAll(".pback[data-id]").forEach(function (b) { b.classList.toggle("liked", Likes.has(+b.dataset.id)); });
@@ -683,4 +697,9 @@ const Likes = (function () {
     if (b) press(b);
   });
   sync();
+  // โหลดยอดถูกใจรวมของทุกภาพ
+  fetch("/api/likes").then(function (r) { return r.json(); }).then(function (d) {
+    Object.keys(d).forEach(function (k) { Counts[k] = d[k]; });
+    sync();
+  }).catch(function () {});
 })();
