@@ -77,6 +77,7 @@ if (detail) {
   const extra = (label, val) => val ? "<div><dt>" + label + "</dt><dd>" + val + "</dd></div>" : "";
 
   detail.dataset.cat = p[2];
+  detail.dataset.id = id;
   detail.style.setProperty("--photo", 'url("images/' + p[3] + '")');
   document.title = p[0] + " | LOOK UP.";
   detail.innerHTML =
@@ -340,17 +341,87 @@ function spinRotate(rx, ry) {   // รวมมุม X,Y เป็นการ�
   if (s < 1e-6) return "";
   return (x / s) + " " + (y / s) + " " + (z / s) + " " + (2 * Math.atan2(s, w) * 180 / Math.PI) + "deg";
 }
+
+// ---- ด้านหลังการ์ด (card back) ----
+var pbUid = 0;
+function pbArt(cat) {
+  function rays(cx, cy, r1, r2, from, to, n) {
+    var s = "";
+    for (var i = 0; i < n; i++) {
+      var a = (from + (to - from) * i / (n - 1)) * Math.PI / 180;
+      s += '<line x1="' + (cx + Math.cos(a) * r1).toFixed(1) + '" y1="' + (cy + Math.sin(a) * r1).toFixed(1) +
+           '" x2="' + (cx + Math.cos(a) * r2).toFixed(1) + '" y2="' + (cy + Math.sin(a) * r2).toFixed(1) + '"/>';
+    }
+    return s;
+  }
+  var st = 'stroke="currentColor" stroke-width="2.4" stroke-linecap="round"';
+  if (cat === "sunrise")
+    return '<path d="M64 118a36 36 0 0 1 72 0z" fill="currentColor"/><g ' + st + '>' + rays(100, 118, 45, 58, 195, 345, 6) + '</g>' +
+           '<path d="M50 118h100" ' + st + '/><path d="M68 129h64" ' + st + ' opacity=".55"/>';
+  if (cat === "sunset")
+    return '<path d="M64 106a36 36 0 0 1 72 0z" fill="currentColor"/><g ' + st + '>' + rays(100, 106, 45, 58, 195, 345, 6) + '</g>' +
+           '<path d="M52 106h96M62 116h76M76 126h48M88 136h24" ' + st + '/>';
+  if (cat === "cloudy")
+    return '<g fill="currentColor"><circle cx="84" cy="112" r="15"/><circle cx="105" cy="100" r="22"/><circle cx="126" cy="113" r="14"/><rect x="72" y="110" width="66" height="17" rx="8.5"/></g>' +
+           '<path d="M56 140h88M72 149h56" ' + st + ' opacity=".55"/>';
+  if (cat === "blue")
+    return '<path fill="currentColor" d="M100 58c3 28 10 35 38 42-28 7-35 14-38 42-3-28-10-35-38-42 28-7 35-14 38-42z"/>' +
+           '<path fill="currentColor" d="M134 62c1 8 3 10 11 11-8 1-10 3-11 11-1-8-3-10-11-11 8-1 10-3 11-11z" opacity=".8"/>' +
+           '<path fill="currentColor" d="M68 128c1 6 2 8 8 8-6 1-7 2-8 8-1-6-2-7-8-8 6 0 7-2 8-8z" opacity=".8"/>';
+  return '<path fill="currentColor" d="M118 68a36 36 0 1 0 14 62 30 30 0 1 1-14-62z"/>' +
+         '<path fill="currentColor" d="M138 70c1 6 2 7 8 8-6 1-7 2-8 8-1-6-2-7-8-8 6-1 7-2 8-8z"/>' +
+         '<circle cx="80" cy="140" r="2" fill="currentColor"/><circle cx="146" cy="116" r="1.6" fill="currentColor"/>';
+}
+function buildBack(el, o) {
+  var t = el.querySelector(".polaroid-caption strong");
+  var title = t ? t.textContent.trim() : "";
+  var idx = o.note ? -1 : PHOTOS.findIndex(function (p) { return p[0] === title; });
+  var p = idx > -1 ? PHOTOS[idx] : null;
+  var cat = p ? p[2] : "night";
+  var no = p ? String(idx + 1).padStart(2, "0") : "";
+  var uid = "pbc" + (++pbUid);
+  var name = p ? p[0] : (o.note || "I look up<br>to remember.");
+  var date = p ? p[1] : (o.sub || "PERSONAL SKY ARCHIVE · 2026");
+  var typeName = p ? TYPE_NAME[cat].toUpperCase() : "SKY ARCHIVE";
+  var meta = p ? "NO. " + no + " / " + PHOTOS.length : "EST. 2026";
+  var spark = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c1 7 4 10 11 11-7 1-10 4-11 11-1-7-4-10-11-11 7-1 10-4 11-11z"/></svg>';
+  var corner = '<b>' + (no || "✦") + '</b>' + spark;
+  var seed = (idx + 5) * 9301;
+  var rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+  var stars = "";
+  for (var i = 0; i < 10; i++)
+    stars += '<i class="pb-star" style="left:' + (8 + rnd() * 84).toFixed(1) + '%;top:' + (6 + rnd() * 88).toFixed(1) +
+             '%;animation-delay:-' + (rnd() * 4).toFixed(1) + 's"></i>';
+  var ring = "LOOK UP • I LOOK UP TO REMEMBER • LOOK UP • I LOOK UP TO REMEMBER • ";
+  var back = document.createElement("div");
+  back.className = "pback";
+  back.dataset.cat = cat;
+  if (p) back.dataset.id = idx + 1;
+  back.innerHTML =
+    '<span class="pb-stars">' + stars + '</span>' +
+    '<span class="pb-foil"></span><span class="pb-glare"></span>' +
+    '<span class="pb-frame"></span>' +
+    '<span class="pb-corner tl">' + corner + '</span><span class="pb-corner br">' + corner + '</span>' +
+    '<div class="pb-body">' +
+      '<svg class="pb-svg" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="' + uid + '" d="M100 100m-84 0a84 84 0 1 1 168 0a84 84 0 1 1-168 0"/></defs>' +
+        '<g class="pb-spin"><text><textPath href="#' + uid + '" textLength="522" lengthAdjust="spacing">' + ring + '</textPath></text></g>' +
+        '<circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" stroke-width="1"/>' +
+        '<g class="pb-spin rev"><circle cx="100" cy="100" r="72" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2 6" stroke-linecap="round"/></g>' +
+        '<circle cx="100" cy="100" r="62" fill="none" stroke="currentColor" stroke-width="1" opacity=".55"/>' +
+        '<g class="pb-art">' + pbArt(cat) + '</g></svg>' +
+      '<div class="pb-title"><span class="pb-logo">LOOK UP<b>.</b></span><h4>' + name + '</h4><small>' + date + '</small></div>' +
+    '</div>' +
+    '<span class="pb-meta"><span>' + typeName + '</span><span>•</span><span>' + meta + '</span></span>' +
+    '<span class="pb-stamp">♥ LIKED</span>';
+  return back;
+}
 function makeSpinner(el, o) {
   o = o || {};
   if (!el || el.dataset.spin) return;
   el.dataset.spin = "1";
   const par = el.parentElement;
   par.style.perspective = "1500px";
-  const t = el.querySelector(".polaroid-caption strong"), d = el.querySelector(".polaroid-caption small");
-  const back = document.createElement("div");
-  back.className = "pback";
-  back.innerHTML = '<span class="back-logo">LOOK UP<b>.</b></span><p>' + (o.note || (t ? t.textContent : "I look up to remember.")) +
-    '</p><small>' + (o.sub || (d ? d.textContent : "PERSONAL SKY ARCHIVE")) + '</small>';
+  const back = buildBack(el, o);
   el.appendChild(back);
   el.classList.add("spin3d");
   let hint = null;
@@ -374,6 +445,8 @@ function makeSpinner(el, o) {
       }
     }
     el.style.rotate = (!busy && !hx && !hy && Math.abs(ry % 360) < 0.1 && Math.abs(rx % 360) < 0.1) ? "" : spinRotate(rx, ry);
+    back.style.setProperty("--mx", (50 - hx * 50) + "%"); back.style.setProperty("--my", (50 + hy * 50) + "%");
+    back.style.setProperty("--fx", ((((ry % 360) + 360) % 360) / 360 * 100 + hx * 15) + "%");
     if (busy) raf = requestAnimationFrame(frame);
   }
   function go() { if (!raf) raf = requestAnimationFrame(frame); }
@@ -509,4 +582,115 @@ function makeSpinner(el, o) {
     const now = performance.now();
     if (now - lock > 380) { lock = now; step(d); }
   }, { passive: false });
+})();
+
+// ===== 10) ระบบถูกใจ (เก็บในเครื่องของผู้ชมด้วย localStorage) =====
+const Likes = (function () {
+  const KEY = "lookup-likes";
+  let ids = [];
+  function load() {
+    try { ids = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { ids = []; }
+    if (!Array.isArray(ids)) ids = [];
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(ids)); } catch (e) {} }
+  load();
+  return {
+    all: function () { return ids.slice(); },
+    has: function (id) { return ids.indexOf(id) > -1; },
+    reload: load,
+    toggle: function (id) {
+      const i = ids.indexOf(id);
+      if (i > -1) ids.splice(i, 1); else ids.push(id);
+      save();
+      document.dispatchEvent(new CustomEvent("likechange", { detail: { id: id } }));
+      return i === -1;
+    }
+  };
+})();
+
+(function () {
+  const HEART = '<svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+  const buttons = [];
+
+  function burst(btn) {
+    if (calm) return;
+    for (let i = 0; i < 9; i++) {
+      const s = document.createElement("i"), a = (i / 9) * Math.PI * 2 + Math.random() * 0.5, r = 34 + Math.random() * 30;
+      s.className = "heart-pop"; s.textContent = "♥";
+      s.style.setProperty("--dx", Math.cos(a) * r + "px");
+      s.style.setProperty("--dy", Math.sin(a) * r - 10 + "px");
+      s.style.fontSize = 9 + Math.random() * 10 + "px";
+      btn.appendChild(s);
+      setTimeout(function () { s.remove(); }, 900);
+    }
+  }
+  function press(btn) {
+    const on = Likes.toggle(+btn.dataset.id);
+    btn.classList.remove("pop"); void btn.offsetWidth;
+    if (on) { btn.classList.add("pop"); burst(btn); }
+  }
+  function makeBtn(id) {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "pill like-btn"; b.dataset.id = id;
+    b.innerHTML = HEART + '<span class="like-text">LIKE</span>';
+    b.addEventListener("click", function () { press(b); });
+    buttons.push(b);
+    return b;
+  }
+  function place(info, id) {
+    if (!info || info.querySelector(".like-btn")) return;
+    info.insertBefore(makeBtn(id), info.querySelector(".object-nav"));
+  }
+
+  // lightbox ในหน้า Gallery + หน้ารายละเอียด
+  document.querySelectorAll(".lightbox").forEach(function (box) {
+    place(box.querySelector(".object-info"), parseInt(box.id.replace("photo-", ""), 10));
+  });
+  if (detail) place(detail.querySelector(".object-info"), parseInt(detail.dataset.id, 10));
+
+  // หัวใจเล็ก ๆ บนการ์ดที่กดถูกใจแล้ว
+  document.querySelectorAll(".photo-card").forEach(function (c) {
+    const m = (c.getAttribute("href") || "").match(/photo-(\d+)/);
+    if (!m) return;
+    c.dataset.pid = m[1];
+    const i = document.createElement("i");
+    i.className = "liked-mark"; i.textContent = "♥"; i.setAttribute("aria-hidden", "true");
+    c.appendChild(i);
+  });
+
+  // ปุ่มลอยมุมซ้ายล่าง: จำนวนที่ถูกใจ กดเพื่อวนดูภาพที่ถูกใจ
+  const fab = document.createElement("button");
+  fab.type = "button"; fab.className = "pill like-fab"; fab.hidden = true;
+  fab.title = "ดูภาพที่ถูกใจ";
+  fab.innerHTML = '<span aria-hidden="true">♥</span> <b>0</b> LIKED';
+  fab.addEventListener("click", function () {
+    const list = Likes.all().sort(function (a, b) { return a - b; });
+    if (!list.length) return;
+    const cur = detail ? parseInt(detail.dataset.id, 10) : 0;
+    const nxt = list.find(function (n) { return n > cur; }) || list[0];
+    location.href = "collection.html?id=" + nxt;
+  });
+  document.body.appendChild(fab);
+
+  function sync() {
+    buttons.forEach(function (b) {
+      const on = Likes.has(+b.dataset.id);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.querySelector(".like-text").textContent = on ? "LIKED" : "LIKE";
+    });
+    document.querySelectorAll(".photo-card[data-pid]").forEach(function (c) { c.classList.toggle("is-liked", Likes.has(+c.dataset.pid)); });
+    document.querySelectorAll(".pback[data-id]").forEach(function (b) { b.classList.toggle("liked", Likes.has(+b.dataset.id)); });
+    const n = Likes.all().length;
+    fab.hidden = n === 0;
+    fab.querySelector("b").textContent = n;
+  }
+  document.addEventListener("likechange", sync);
+  addEventListener("storage", function (e) { if (e.key === "lookup-likes") { Likes.reload(); sync(); } });
+  // กด L เพื่อถูกใจในหน้ารายละเอียด
+  addEventListener("keydown", function (e) {
+    if (e.key.toLowerCase() !== "l" || e.metaKey || e.ctrlKey || e.altKey) return;
+    const b = detail ? detail.querySelector(".like-btn") : document.querySelector(".lightbox:target .like-btn");
+    if (b) press(b);
+  });
+  sync();
 })();

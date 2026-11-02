@@ -1658,14 +1658,75 @@ html[data-time="night"]   { --paper: #a9aec0; --paper-2: #9aa0b6; --muted: #3f3e
 .spin3d > .polaroid-photo, .spin3d > .polaroid-caption { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .spin3d img { -webkit-user-drag: none; }
 .pback {
-  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-  text-align: center; transform: rotateY(180deg); backface-visibility: hidden; -webkit-backface-visibility: hidden;
-  background: repeating-linear-gradient(transparent 0 27px, rgba(40, 30, 10, .06) 27px 28px);
+  --bg1: #17142a; --bg2: #3a2d5c; --foil: #d3ef7e; --foil2: #c9b6ff;
+  --mx: 50%; --my: 50%; --fx: 50%;
+  position: absolute; inset: 0; overflow: hidden; border-radius: 2px;
+  container-type: size; color: var(--foil);
+  transform: rotateY(180deg); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  background:
+    radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--foil) 16%, transparent), transparent 62%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 9px),
+    radial-gradient(circle at 50% 42%, var(--bg2), var(--bg1) 80%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), inset 0 0 6cqw rgba(0,0,0,.45);
 }
-.back-logo { font-size: 20px; letter-spacing: .12em; font-weight: 600; }
-.back-logo b { background: var(--lime); padding: 0 4px; }
-.pback p { font-family: var(--hand); font-size: clamp(16px, 2.2vw, 24px); line-height: 1.35; color: var(--muted); padding: 0 8%; }
-.pback small { font-size: 10px; letter-spacing: .22em; color: var(--muted); }
+.pback[data-cat="sunrise"] { --bg1: #2a1420; --bg2: #6a2f3c; --foil: #f7c85a; --foil2: #ff9a76; }
+.pback[data-cat="sunset"]  { --bg1: #1d1030; --bg2: #5e2748; --foil: #ffa36e; --foil2: #ff7fa3; }
+.pback[data-cat="cloudy"]  { --bg1: #181e25; --bg2: #3c4a57; --foil: #d5dde4; --foil2: #8fb0c8; }
+.pback[data-cat="blue"]    { --bg1: #0a1a38; --bg2: #1f4c88; --foil: #c3e6ff; --foil2: #7dbcff; }
+
+.pb-foil, .pb-glare, .pb-stars { position: absolute; inset: 0; pointer-events: none; }
+.pb-foil {
+  mix-blend-mode: color-dodge; opacity: .30;
+  background: linear-gradient(115deg, transparent 18%, #ff7ad9 32%, #ffe14d 44%, #5ffbf1 56%, #8f7bff 68%, transparent 82%);
+  background-size: 280% 280%; background-position: var(--fx) var(--my);
+}
+.pb-glare {
+  mix-blend-mode: overlay; overflow: hidden;
+  background: radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,.42), transparent 46%);
+}
+.pb-glare::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 42%, rgba(255,255,255,.55) 50%, transparent 58%);
+  background-size: 260% 100%; animation: pbSweep 5.5s ease-in-out infinite;
+}
+.pb-star { position: absolute; width: 1.1cqw; height: 1.1cqw; border-radius: 50%; background: var(--foil); opacity: 0; animation: pbTwinkle 3.6s ease-in-out infinite; }
+
+.pb-frame { position: absolute; inset: 4cqw; border: 1px solid color-mix(in srgb, var(--foil) 75%, transparent); border-radius: 3cqw; pointer-events: none; }
+.pb-frame::after { content: ""; position: absolute; inset: 1.6cqw; border: 1px dashed color-mix(in srgb, var(--foil) 40%, transparent); border-radius: 2cqw; }
+
+.pb-corner { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 1cqw; font: 600 5cqw/1 var(--sans); letter-spacing: .04em; }
+.pb-corner svg { width: 4cqw; height: 4cqw; fill: currentColor; }
+.pb-corner.tl { left: 8.5cqw; top: 8cqw; }
+.pb-corner.br { right: 8.5cqw; bottom: 8cqw; transform: rotate(180deg); }
+
+.pb-body { position: absolute; inset: 8cqw 0 19cqw; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3cqw; }
+.pb-svg { width: 56cqw; height: 56cqw; flex: none; overflow: visible; }
+.pb-svg text { font: 600 8.4px var(--sans); letter-spacing: .3em; fill: currentColor; opacity: .85; }
+.pb-spin { transform-box: view-box; transform-origin: 50% 50%; animation: pbSpin 50s linear infinite; }
+.pb-spin.rev { animation-duration: 38s; animation-direction: reverse; }
+.pb-art { transform-box: view-box; transform-origin: 50% 50%; animation: pbBreathe 4.5s ease-in-out infinite; filter: drop-shadow(0 0 5px color-mix(in srgb, var(--foil) 70%, transparent)); }
+
+.pb-title { text-align: center; padding: 0 12cqw; }
+.pb-logo { display: inline-block; font: 700 4.4cqw/1 var(--sans); letter-spacing: .24em; color: #fff; }
+.pb-logo b { background: var(--foil); color: var(--bg1); padding: 0 .5cqw; margin-left: .6cqw; letter-spacing: 0; }
+.pb-title h4 { margin: 2.2cqw 0 1.8cqw; font: italic 400 8.6cqw/1.08 var(--serif); color: #fff8ec; text-shadow: 0 .4cqw 2cqw rgba(0,0,0,.4); }
+.pb-title small { font: 500 3.2cqw var(--sans); letter-spacing: .28em; color: var(--foil); opacity: .9; }
+
+.pb-meta { position: absolute; left: 0; right: 0; bottom: 9.6cqw; display: flex; justify-content: center; gap: 2.6cqw; font: 600 2.9cqw var(--sans); letter-spacing: .24em; opacity: .85; }
+
+.pb-stamp {
+  position: absolute; top: 13cqw; right: 8cqw; padding: 1cqw 2.6cqw; border: .55cqw solid var(--foil2); border-radius: 1.4cqw;
+  color: var(--foil2); font: 700 3.6cqw var(--sans); letter-spacing: .2em; background: color-mix(in srgb, var(--bg1) 60%, transparent);
+  opacity: 0; scale: 1.7; rotate: 10deg; transition: opacity .35s, scale .45s cubic-bezier(.3, 1.6, .5, 1);
+}
+.pback.liked .pb-stamp { opacity: 1; scale: 1; }
+
+@keyframes pbSpin { to { transform: rotate(360deg); } }
+@keyframes pbBreathe { 50% { transform: scale(1.035); } }
+@keyframes pbTwinkle { 0%, 100% { opacity: 0; transform: scale(.4); } 50% { opacity: .85; transform: scale(1.3); } }
+@keyframes pbSweep { from { background-position: 150% 0; } to { background-position: -60% 0; } }
+@media (prefers-reduced-motion: reduce) { .pb-spin, .pb-art, .pb-star, .pb-glare::after { animation: none; } .pb-star { opacity: .5; } }
 .spin-hint { position: absolute; left: 50%; bottom: -34px; translate: -50% 0; font-size: 10px; letter-spacing: .28em; color: var(--muted); white-space: nowrap; transition: opacity .6s; animation: hintPulse 2.6s ease-in-out infinite; pointer-events: none; }
 .spin-hint.gone { opacity: 0; animation: none; }
 @keyframes hintPulse { 50% { opacity: .35; } }
@@ -1693,3 +1754,28 @@ html { --b1: rgba(255,255,255,.5); --b2: rgba(150,170,188,.38); }
 /* ปุ่ม OPEN FULL PAGE: เป็นปุ่มเต็มรูปแบบแยกบรรทัด ไม่ปนกับ PREVIOUS/NEXT */
 .open-full { display: inline-flex; margin-top: 26px; }
 @media (max-width: 600px) { .open-full { display: flex; justify-content: center; width: 100%; } }
+
+/* ===== EXTRAS 8: ระบบถูกใจ ===== */
+.like-btn { display: flex; align-items: center; gap: 9px; width: max-content; margin-bottom: 14px; position: relative; background: transparent; color: inherit; font-family: inherit; cursor: pointer; }
+.like-btn .heart { width: 16px; height: 16px; fill: transparent; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; transition: fill .3s, stroke .3s; }
+.like-btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.like-btn[aria-pressed="true"] .heart { fill: #ff6b86; stroke: #ff6b86; }
+.like-btn.pop .heart { animation: heartBeat .55s cubic-bezier(.3, 1.6, .5, 1); }
+.heart-pop { position: absolute; left: 28px; top: 50%; pointer-events: none; font-style: normal; color: #ff6b86; animation: heartPop .85s ease-out forwards; }
+@keyframes heartBeat { 0% { transform: scale(1); } 35% { transform: scale(1.6); } 100% { transform: scale(1); } }
+@keyframes heartPop {
+  from { transform: translate(-50%, -50%) scale(.4); opacity: 1; }
+  to { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.1); opacity: 0; }
+}
+
+.like-fab { position: fixed; left: 20px; bottom: 20px; z-index: 90; background: var(--card); box-shadow: 0 8px 20px -8px rgba(40, 30, 10, .4); font-family: inherit; cursor: pointer; }
+.like-fab[hidden] { display: none; }
+.like-fab span { color: #ff6b86; font-size: 12px; }
+.like-fab b { font-weight: 700; }
+
+.liked-mark {
+  position: absolute; top: 3.2%; right: 4.5%; z-index: 3; font-style: normal; font-size: 20px; line-height: 1; color: #ff6b86; pointer-events: none;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .55)); opacity: 0; scale: .3; transition: opacity .3s, scale .45s cubic-bezier(.3, 1.8, .5, 1);
+}
+.photo-card.is-liked .liked-mark { opacity: 1; scale: 1; }
+@media (max-width: 600px) { .like-fab { left: 12px; bottom: 12px; } }
