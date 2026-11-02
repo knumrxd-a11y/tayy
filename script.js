@@ -59,7 +59,7 @@ document.addEventListener("keydown", function (e) {
 document.querySelectorAll(".lightbox").forEach(function (box) {
   const n = box.id.replace("photo-", "");
   const link = document.createElement("a");
-  link.className = "text-link";
+  link.className = "primary-btn open-full";
   link.href = "collection.html?id=" + n;
   link.textContent = "OPEN FULL PAGE ↗";
   box.querySelector(".object-info").appendChild(link);
@@ -77,6 +77,7 @@ if (detail) {
   const extra = (label, val) => val ? "<div><dt>" + label + "</dt><dd>" + val + "</dd></div>" : "";
 
   detail.dataset.cat = p[2];
+  detail.style.setProperty("--photo", 'url("images/' + p[3] + '")');
   document.title = p[0] + " | LOOK UP.";
   detail.innerHTML =
     '<a class="lightbox-close" href="gallery.html#c-' + id + '">BACK ×</a>' +
@@ -328,4 +329,184 @@ const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     glow.style.translate = cx + "px " + cy + "px";
     requestAnimationFrame(loop);
   })();
+})();
+
+// ===== 8) โพลารอยด์หมุน 360° (ใช้ซ้ำ: ฮีโร่ / หน้ารายละเอียด / lightbox / ปฏิทิน) =====
+var spunOnce = false;
+function spinRotate(rx, ry) {   // รวมมุม X,Y เป็นการหมุนแบบแกน-มุม (ใช้กับ CSS rotate)
+  const a = rx * Math.PI / 360, b = ry * Math.PI / 360;
+  const cx = Math.cos(a), sx = Math.sin(a), cy = Math.cos(b), sy = Math.sin(b);
+  const w = cx * cy, x = sx * cy, y = cx * sy, z = sx * sy, s = Math.sqrt(x * x + y * y + z * z);
+  if (s < 1e-6) return "";
+  return (x / s) + " " + (y / s) + " " + (z / s) + " " + (2 * Math.atan2(s, w) * 180 / Math.PI) + "deg";
+}
+function makeSpinner(el, o) {
+  o = o || {};
+  if (!el || el.dataset.spin) return;
+  el.dataset.spin = "1";
+  const par = el.parentElement;
+  par.style.perspective = "1500px";
+  const t = el.querySelector(".polaroid-caption strong"), d = el.querySelector(".polaroid-caption small");
+  const back = document.createElement("div");
+  back.className = "pback";
+  back.innerHTML = '<span class="back-logo">LOOK UP<b>.</b></span><p>' + (o.note || (t ? t.textContent : "I look up to remember.")) +
+    '</p><small>' + (o.sub || (d ? d.textContent : "PERSONAL SKY ARCHIVE")) + '</small>';
+  el.appendChild(back);
+  el.classList.add("spin3d");
+  let hint = null;
+  if (o.hint) {
+    if (getComputedStyle(par).position === "static") par.style.position = "relative";
+    hint = document.createElement("div"); hint.className = "spin-hint"; hint.textContent = "DRAG TO SPIN ↻";
+    par.appendChild(hint);
+  }
+  let rx = 0, ry = 0, vx = 0, vy = 0, hx = 0, hy = 0, lx = 0, ly = 0, sx0 = 0, sy0 = 0;
+  let down = false, moved = false, idle = 0, raf = 0;
+  function frame() {
+    raf = 0;
+    let busy = down;
+    if (!down) {
+      if (Math.abs(vx) + Math.abs(vy) > 0.05) { ry += vx; rx += vy; vx *= 0.95; vy *= 0.95; idle = performance.now(); busy = true; }
+      else {
+        const wait = performance.now() - idle < 700;
+        const ty = Math.round(ry / 360) * 360 + hx * 9, tx = Math.round(rx / 360) * 360 - hy * 7;
+        if (!wait) { ry += (ty - ry) * 0.07; rx += (tx - rx) * 0.07; }
+        busy = wait || Math.abs(ty - ry) + Math.abs(tx - rx) > 0.05;
+      }
+    }
+    el.style.rotate = (!busy && !hx && !hy && Math.abs(ry % 360) < 0.1 && Math.abs(rx % 360) < 0.1) ? "" : spinRotate(rx, ry);
+    if (busy) raf = requestAnimationFrame(frame);
+  }
+  function go() { if (!raf) raf = requestAnimationFrame(frame); }
+  el.addEventListener("pointerdown", function (e) {
+    down = true; moved = false; lx = sx0 = e.clientX; ly = sy0 = e.clientY; vx = vy = 0;
+    el.setPointerCapture(e.pointerId); el.classList.add("grab"); go();
+    spunOnce = true; document.querySelectorAll(".spin-hint").forEach((h) => h.classList.add("gone"));
+  });
+  el.addEventListener("pointermove", function (e) {
+    if (!down) return;
+    const dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY;
+    if (Math.abs(e.clientX - sx0) + Math.abs(e.clientY - sy0) > 6) moved = true;
+    ry += dx * 0.45; rx -= dy * 0.45; vx = dx * 0.45; vy = -dy * 0.45;
+  });
+  function up() { if (!down) return; down = false; idle = performance.now(); el.classList.remove("grab"); go(); }
+  el.addEventListener("pointerup", up);
+  el.addEventListener("pointercancel", up);
+  el.addEventListener("click", function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+  el.addEventListener("dblclick", function () { vx = 17; go(); });                 // ดับเบิลคลิก = หมุนหนึ่งรอบ
+  par.addEventListener("mousemove", function (e) {
+    const r = par.getBoundingClientRect();
+    hx = ((e.clientX - r.left) / r.width - 0.5) * 2; hy = ((e.clientY - r.top) / r.height - 0.5) * 2; go();
+  });
+  par.addEventListener("mouseleave", function () { hx = hy = 0; go(); });
+}
+(function () {
+  makeSpinner(document.querySelector(".hero-main"), { note: "I look up<br>to remember.", sub: "PERSONAL SKY ARCHIVE · 2026", hint: true });
+  if (detail) makeSpinner(detail.querySelector(".object-stage .polaroid"), { hint: true });
+  document.querySelectorAll(".lightbox .object-stage .polaroid, .result-stage .polaroid").forEach((p) => makeSpinner(p));
+  // ปฏิทิน: พื้นหลังแผงผลลัพธ์เรืองแสงตามสีของภาพ
+  document.querySelectorAll(".result-stage").forEach(function (st) {
+    const img = st.querySelector("img");
+    if (img) st.style.setProperty("--photo", 'url("' + img.getAttribute("src") + '")');
+  });
+})();
+
+// ===== 9) Fresh moments: ลูกกลิ้งภาพ 3 มิติ + แถบเลื่อนแนวตั้ง =====
+(function () {
+  const grid = document.querySelector(".latest-section .gallery-grid");
+  if (!grid) return;
+  const N = 8, STEP = 36, CW = 250, CH = 330, R = (CH / 2) / Math.tan((STEP / 2) * Math.PI / 180);
+  const items = PHOTOS.map((p, i) => ({ p: p, id: i + 1 })).slice(-N).reverse();
+  const wrap = document.createElement("div");
+  wrap.className = "drum";
+  wrap.innerHTML =
+    '<div class="drum-slider" role="slider" tabindex="0" aria-label="เลื่อนดูภาพล่าสุด" aria-valuemin="1" aria-valuemax="' + N + '">' +
+      '<button class="ds-btn" type="button" data-d="-1" aria-label="ภาพก่อนหน้า">▲</button>' +
+      '<div class="ds-track"><i class="ds-knob"></i></div>' +
+      '<button class="ds-btn" type="button" data-d="1" aria-label="ภาพถัดไป">▼</button></div>' +
+    '<div class="drum-view"><div class="drum-stage"></div></div><div class="drum-info" aria-live="polite"></div>';
+  grid.replaceWith(wrap);
+
+  const stage = wrap.querySelector(".drum-stage"), info = wrap.querySelector(".drum-info");
+  const slider = wrap.querySelector(".drum-slider"), track = wrap.querySelector(".ds-track"), knob = wrap.querySelector(".ds-knob");
+  stage.style.cssText = "width:" + CW + "px;height:" + CH + "px;margin:-" + CH / 2 + "px 0 0 -" + CW / 2 + "px";
+  const cards = items.map(function (it, i) {
+    const p = it.p, c = document.createElement("div");
+    c.className = "drum-card";
+    c.innerHTML = '<div class="polaroid"><span class="polaroid-photo"><img src="images/' + p[3] + '" alt="' + p[0] + '" draggable="false" loading="lazy"></span>' +
+      '<span class="polaroid-caption"><strong>' + p[0] + '</strong><small>' + p[1] + ' · ' + TYPE_NAME[p[2]].toUpperCase() + '</small></span></div>';
+    c.addEventListener("click", function () { if (!moved) { target = i; go(); } });
+    stage.appendChild(c);
+    return c;
+  });
+
+  let pos = 0, target = 0, raf = 0, shown = -1, moved = false, drag = null;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  function render() {
+    stage.style.transform = "translateZ(" + -R + "px) rotateX(" + pos * STEP + "deg)";
+    cards.forEach(function (c, i) {
+      const d = Math.abs(i - pos), pull = Math.max(0, 1 - d) * 46;
+      c.style.transform = "rotateX(" + -i * STEP + "deg) translateZ(" + (R + pull) + "px)";
+      c.style.opacity = clamp(1 - (d - 1.1) / 1.5, 0, 1);
+      c.style.pointerEvents = d > 2.4 ? "none" : "";
+    });
+    knob.style.top = (pos / (N - 1)) * 100 + "%";
+    const k = Math.round(clamp(pos, 0, N - 1));
+    if (k !== shown) {
+      shown = k;
+      const it = items[k], p = it.p;
+      slider.setAttribute("aria-valuenow", k + 1);
+      info.innerHTML = '<div class="di-in"><span class="section-label">' + String(k + 1).padStart(2, "0") + ' / ' + String(N).padStart(2, "0") + ' — ' + TYPE_NAME[p[2]].toUpperCase() + '</span>' +
+        '<h3>' + p[0] + '</h3><p class="di-date">' + p[1] + '</p><p>' + p[4] + '</p>' +
+        '<a class="text-link" href="collection.html?id=' + it.id + '">OPEN FULL PAGE ↗</a></div>';
+    }
+  }
+  function tick() {
+    pos += (target - pos) * 0.1;
+    render();
+    if (Math.abs(target - pos) > 0.002 || drag) raf = requestAnimationFrame(tick);
+    else { pos = target; render(); raf = 0; }
+  }
+  function go() { if (!raf) raf = requestAnimationFrame(tick); }
+  const snap = () => { target = Math.round(clamp(target, 0, N - 1)); go(); };
+  render();
+
+  // ลากที่ลูกกลิ้ง (เมาส์)
+  const view = wrap.querySelector(".drum-view");
+  view.addEventListener("pointerdown", function (e) {
+    if (e.pointerType === "touch") return;
+    drag = { y: e.clientY, t: target }; moved = false; view.setPointerCapture(e.pointerId); go();
+  });
+  view.addEventListener("pointermove", function (e) {
+    if (!drag) return;
+    if (Math.abs(e.clientY - drag.y) > 5) moved = true;
+    target = clamp(drag.t - (e.clientY - drag.y) / 120, -0.3, N - 0.7);
+  });
+  const end = function () { if (!drag) return; drag = null; snap(); setTimeout(function () { moved = false; }, 0); };
+  view.addEventListener("pointerup", end); view.addEventListener("pointercancel", end);
+
+  // ลากปุ่มกลมบนแถบ
+  function byTrack(e) { const r = track.getBoundingClientRect(); target = clamp((e.clientY - r.top) / r.height, 0, 1) * (N - 1); go(); }
+  knob.addEventListener("pointerdown", function (e) { drag = { knob: 1 }; knob.setPointerCapture(e.pointerId); e.stopPropagation(); });
+  knob.addEventListener("pointermove", function (e) { if (drag && drag.knob) byTrack(e); });
+  const kend = function () { if (drag && drag.knob) { drag = null; snap(); } };
+  knob.addEventListener("pointerup", kend); knob.addEventListener("pointercancel", kend);
+  track.addEventListener("click", function (e) { if (e.target === track) { byTrack(e); snap(); } });
+
+  // ปุ่มลูกศร + คีย์บอร์ด + ล้อเมาส์ (ถึงปลายทางแล้วให้เลื่อนหน้าต่อได้)
+  const step = (d) => { target = clamp(Math.round(target) + d, 0, N - 1); go(); };
+  slider.querySelectorAll(".ds-btn").forEach((b) => b.addEventListener("click", () => step(+b.dataset.d)));
+  slider.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowUp") { step(-1); e.preventDefault(); }
+    if (e.key === "ArrowDown") { step(1); e.preventDefault(); }
+    if (e.key === "Home") { target = 0; go(); }
+    if (e.key === "End") { target = N - 1; go(); }
+  });
+  let lock = 0;
+  wrap.addEventListener("wheel", function (e) {
+    const d = Math.sign(e.deltaY), cur = Math.round(target);
+    if (!d || (d > 0 && cur >= N - 1) || (d < 0 && cur <= 0)) return;
+    e.preventDefault();
+    const now = performance.now();
+    if (now - lock > 380) { lock = now; step(d); }
+  }, { passive: false });
 })();
